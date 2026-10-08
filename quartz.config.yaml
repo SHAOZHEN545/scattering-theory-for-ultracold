@@ -15,7 +15,7 @@ configuration:
     fontOrigin: local
     cdnCaching: false
     typography:
-      header: Georgia
+      header: system-ui
       body: system-ui
       code: monospace
     colors:
@@ -69,7 +69,7 @@ plugins:
     enabled: true
     order: 50
     options:
-      maxDepth: 3
+      maxDepth: 2
       minEntries: 1
     layout:
       position: right
@@ -106,11 +106,14 @@ plugins:
     enabled: true
   - source: github:quartz-community/explorer
     enabled: true
+    options:
+      title: Notes
+      folderClickBehavior: collapse
     layout:
       position: left
       priority: 50
   - source: github:quartz-community/graph
-    enabled: true
+    enabled: false
     layout:
       position: right
       priority: 10
@@ -149,7 +152,7 @@ plugins:
       priority: 30
       group: toolbar
   - source: github:quartz-community/reader-mode
-    enabled: true
+    enabled: false
     layout:
       position: left
       priority: 35

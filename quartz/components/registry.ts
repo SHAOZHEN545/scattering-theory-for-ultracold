@@ -78,6 +78,17 @@ class ComponentRegistry {
       try {
         let instance: QuartzComponent
         if (typeof r.component === "function") {
+          // Layouts may instantiate a constructor with non-default options.
+          // Reuse those instances instead of constructing an unused default
+          // whose scripts can bind the same controls a second time.
+          const ctorId = (r.component as unknown as { __cacheId?: string }).__cacheId
+          const cached = ctorId
+            ? [...this.instanceCache].filter(([key]) => key.startsWith(`${ctorId}:`))
+            : []
+          if (cached.length) {
+            results.push(...cached.map(([, component]) => component))
+            continue
+          }
           instance = this.instantiate(r.component as QuartzComponentConstructor, undefined)
         } else {
           instance = r.component as QuartzComponent

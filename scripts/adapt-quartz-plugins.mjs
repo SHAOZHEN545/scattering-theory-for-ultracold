@@ -30,6 +30,8 @@ for (const plugin of ["explorer", "search", "graph"]) {
     source = source.replace('folderLink.href = "/" + (folderHref || "")', 'folderLink.href = quartzNoteUrl(folderHref || "index")')
       .replace('link.href = "/" + node.data.slug', 'link.href = quartzNoteUrl(node.data.slug)')
       .replace('const currentSlug = (e.detail?.url || "").replace(/^\\/+/, "");', 'const currentSlug = quartzCurrentSlug(window);')
+      .replace('link.textContent = node.displayName || node.slugSegment;', 'link.textContent = node.displayName || node.slugSegment; link.title = link.textContent; link.setAttribute("aria-label", link.textContent);')
+      .replace('if (folderTitle) folderTitle.textContent = node.displayName || node.slugSegment;', 'if (folderTitle) { folderTitle.textContent = node.displayName || node.slugSegment; folderTitle.title = folderTitle.textContent; }')
   } else {
     source = source.replaceAll('getFullSlugFromUrl()', 'quartzCurrentSlug(window)')
       .replaceAll('window.location.href = target', 'window.location.href = quartzNoteUrl(target)')

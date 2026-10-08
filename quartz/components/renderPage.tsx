@@ -4,7 +4,7 @@ import BodyConstructor from "./Body"
 import { JSResourceToScriptElement, StaticResources } from "../util/resources"
 import { FullSlug, RelativeURL, joinSegments, normalizeHastElement } from "../util/path"
 import { clone } from "../util/clone"
-import { visit } from "unist-util-visit"
+import { visit, SKIP } from "unist-util-visit"
 import { Root, Element, ElementContent } from "hast"
 import { GlobalConfiguration } from "../cfg"
 import { i18n } from "../i18n"
@@ -102,7 +102,6 @@ function renderTranscludes(
           ]
           return
         }
-        visited.add(transcludeTarget)
 
         let page = componentData.allFiles.find((f) => f.slug === transcludeTarget)
         if (!page) {
@@ -150,7 +149,9 @@ function renderTranscludes(
           }
         } else if (blockRef?.startsWith("#") && page.htmlAst) {
           // header transclude
-          blockRef = blockRef.slice(1)
+          // CrawlLinks already resolves the heading using Quartz's native
+          // anchor rules. The embed metadata still contains the raw heading.
+          blockRef = String(inner.properties.href).split("#")[1] ?? blockRef.slice(1)
           let startIdx = undefined
           let startDepth = undefined
           let endIdx = undefined
@@ -221,6 +222,16 @@ function renderTranscludes(
             },
           ]
         }
+        // Track ancestors of this embed, not every previous embed on the page.
+        // Repeating a source note is valid; only a recursive cycle is blocked.
+        renderTranscludes(
+          { type: "root", children: node.children },
+          cfg,
+          slug,
+          componentData,
+          new Set([...visited, transcludeTarget]),
+        )
+        return SKIP
       }
     }
   })

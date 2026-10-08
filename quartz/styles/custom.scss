@@ -87,15 +87,177 @@ article {
 
 .page-title {
   line-height: 1.3;
-  font-size: 1.45rem;
+  font-size: 1rem;
+  font-weight: 600;
 }
 
 @media (max-width: 800px) {
   .page-title { font-size: 1.15rem; }
 }
 
-@media (min-width: 1201px) {
-  .page > #quartz-body {
-    grid-template-columns: 270px minmax(0, 1fr) 270px;
+// Reading measure remains bounded even when either sidebar is hidden.
+:root {
+  --reading-width: 45rem;
+  --left-panel: 14rem;
+  --right-panel: 14rem;
+}
+
+.sidebar-controls {
+  display: contents;
+}
+
+.sidebar-toggle {
+  position: fixed;
+  top: 0.75rem;
+  z-index: 110;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  background: var(--light);
+  color: var(--darkgray);
+  cursor: pointer;
+
+  &[hidden] { display: none; }
+  &:hover { background: var(--highlight); }
+  &:focus-visible { outline: 2px solid var(--secondary); outline-offset: 2px; }
+}
+
+.sidebar-toggle-left { left: 0.75rem; }
+.sidebar-toggle-right { right: 0.75rem; }
+
+// Native explorer, with Obsidian-style single-line file and folder rows.
+.explorer-content {
+  ul li > a,
+  .folder-container > div {
+    display: block;
+    min-width: 0;
+    max-width: 100%;
   }
+
+  ul li > a,
+  .folder-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-wrap: nowrap;
+  }
+
+  ul li > a {
+    padding: 0.3rem 0.45rem;
+    border-radius: 5px;
+    font-size: 0.85rem;
+    font-weight: 400;
+    line-height: 1.5;
+    opacity: 1;
+    color: var(--darkgray);
+
+    &:hover { background: var(--highlight); }
+    &.active { background: var(--highlight); color: var(--secondary); }
+  }
+
+  .folder-container {
+    padding-block: 0.3rem;
+
+    > div { flex: 1; }
+    .folder-button { width: 100%; min-width: 0; }
+    .folder-title { font-family: var(--bodyFont); font-size: 0.85rem; font-weight: 500; }
+  }
+}
+
+.sidebar {
+  .toc-header h3,
+  .desktop-explorer h2,
+  .backlinks h3 { font-family: var(--bodyFont); font-size: 0.85rem; font-weight: 600; }
+
+  .toc-content li { line-height: 1.45; margin-block: 0.35rem; font-size: 0.8rem; }
+  .backlinks li { font-size: 0.8rem; line-height: 1.45; margin-block: 0.5rem; }
+}
+
+.page .sidebar ul.toc-content.overflow > li > a { opacity: 0.7; }
+
+// Links read as links, without a background pill around every phrase.
+article a.internal {
+  background: transparent;
+  padding: 0;
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--secondary) 35%, transparent);
+  text-underline-offset: 0.15em;
+}
+
+article > ul > li { margin-block: 0.75rem; }
+
+@media (min-width: 801px) {
+  :root[data-left-hidden] { --left-panel: 0rem; }
+
+  .page {
+    max-width: calc(var(--reading-width) + var(--left-panel) + var(--right-panel) + 4rem);
+    padding-inline: 1rem;
+  }
+
+  .page > #quartz-body {
+    grid-template-columns: var(--left-panel) minmax(0, 1fr) var(--right-panel);
+    column-gap: 2rem;
+    padding: 0;
+
+    .sidebar { padding: 4rem 0 1.5rem; gap: 1.25rem; min-width: 0; }
+    .page-header { margin-top: 4rem; }
+    .center { grid-column: 2; grid-row: 1 / 3; }
+    .center, footer { min-width: 0; width: 100%; max-width: var(--reading-width); }
+  }
+
+  :root[data-left-hidden] .page > #quartz-body .sidebar.left { display: none; }
+}
+
+@media (min-width: 1201px) {
+  :root[data-right-hidden] { --right-panel: 0rem; }
+  :root[data-right-hidden] .page > #quartz-body .sidebar.right { display: none; }
+}
+
+@media (min-width: 801px) and (max-width: 1200px) {
+  :root { --right-panel: 0rem; }
+  .page > #quartz-body {
+    grid-template-columns: var(--left-panel) minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 1200px) {
+  // The outline can be opened as a drawer on tablets and phones.
+  .page > #quartz-body .sidebar.right {
+    position: fixed;
+    inset: 0 0 0 auto;
+    z-index: 105;
+    display: flex;
+    flex-direction: column;
+    width: min(19rem, 90vw);
+    height: 100dvh;
+    padding: 4rem 1rem 1rem;
+    background: var(--light);
+    border-left: 1px solid var(--lightgray);
+    box-shadow: -8px 0 24px #00000012;
+
+    > .toc { display: flex; max-height: none; }
+    > * { flex: 0 1 auto; }
+  }
+
+  :root[data-right-hidden] .page > #quartz-body .sidebar.right { display: none; }
+}
+
+@media (max-width: 800px) {
+  .sidebar-toggle-left { display: none; }
+  .sidebar-toggle-right { top: 1.5rem; }
+  .page > #quartz-body .sidebar.left:has(.explorer) { padding-right: 2.5rem; }
+  .page .sidebar.left .page-title { font-size: 1rem; flex: 1; min-width: 0; }
+  .page .sidebar.left .spacer { display: none; }
+  .page .sidebar.left .search { flex-grow: 0; }
+  .page .sidebar.left .search-button { width: 2rem; padding: 0; }
+  .page .sidebar.left .search-button > p { display: none; }
+  .page .explorer .explorer-content { position: fixed; left: 0; padding-inline: 1rem; }
+  .explorer-content ul li > a { font-size: 0.95rem; }
+  .article-title { font-size: 1.65rem; }
 }

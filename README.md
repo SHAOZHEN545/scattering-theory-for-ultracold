@@ -60,7 +60,11 @@ Expected website address after the first successful deployment:
 
 Edit and save the original notes in your local editor or Obsidian, then commit and push to `main`. GitHub Actions renders and publishes the latest pushed content. Refresh the website after the deployment succeeds. Local changes that have not been pushed are not yet on the website.
 
-New notes and images under `Scattering theory notes/` are picked up automatically. The explorer and search update without configuration changes. Add a link to `index.md` if a new chapter should also appear in the curated reading order. Notes marked `draft: true` in YAML frontmatter are excluded by Quartz.
+New notes and images under `Scattering theory notes/` are picked up automatically. The explorer and search update without configuration changes. Add a link and brief description to `index.md` if a new chapter should also appear in the topic guide. Notes marked `draft: true` in YAML frontmatter are excluded by Quartz.
+
+The website uses a reading column capped at 720px, single-line explorer entries with full-title tooltips, and independent sidebar controls that remember your choice. On phones, use the native notes menu and the outline button. The graph is disabled. Hiding sidebars keeps the reading column narrow.
+
+Native Obsidian links and embeds are retained: `[[Note]]`, `[[Note|label]]`, `[[Note#Heading]]`, `[[Note#^block-id]]`, `![[Note]]`, `![[Note#Heading]]`, and `![[Note#^block-id]]`. Source-note edits update embeds at the next build and deployment; manually copied quotes remain ordinary text. Use unique note names or explicit paths when names are ambiguous.
 
 The build validates note pages, internal links, heading anchors, local assets and MathJax errors before deploying. A failed build leaves the last successful website online; inspect the failed step under Actions. The workflow also supports **Run workflow** for a manual rebuild.
 
@@ -74,9 +78,11 @@ npm run plugins
 npm run preview
 ```
 
-Open **http://localhost:8080**. The preview rebuilds when notes change. For a production check, run `npm run build` followed by `npm run verify`.
+Open **http://localhost:8080**. The preview rebuilds when notes change. For a production check, run `npm run build` followed by `npm run verify`. Run `npm run verify:links` to check native links and embeds with isolated temporary fixtures; it leaves the public output unchanged.
 
 Quartz core is vendored in `quartz/` from the official `v5.0.0` release (commit `ab346fa66a895e12d63a308e70ce330ba795822a`), with its MIT license in `QUARTZ_LICENSE.txt`. npm dependencies are locked in `package-lock.json`; Quartz plugins are pinned to commits in `quartz.lock.json`. The generic figure and equation styles live in `quartz/styles/custom.scss`. Two small corrections in Quartz's plugin installer handle spaces in the Windows repository path and return a failing exit status when plugin installation fails. `scripts/adapt-quartz-plugins.mjs` makes the pinned explorer, search and graph plugins use Quartz's existing shared content-index request, so they work under the GitHub repository subpath and in future nested note folders. The `plugins` command applies this adapter automatically and safely on repeated runs. Keep `note-properties` enabled: it supplies title and frontmatter parsing even though its property display is hidden.
+
+`quartz/components/SidebarControls.tsx` and its browser script add sidebar toggles through the native layout dispatcher in `quartz.ts`. Quartz's component registry reuses configured instances so controls receive one copy of their scripts. Two small fixes in Quartz's existing embed renderer allow repeated embeds of the same note and resolve heading embeds through the native link anchor. Circular embeds remain protected. No separate Markdown parser is introduced.
 
 Only `Scattering theory notes/` is used as website content. Root maintenance documents, `.obsidian/`, local plugin settings and website source are not rendered as public notes. Renaming the GitHub repository later requires updating `configuration.baseUrl` in `quartz.config.yaml` and the repository links here.
 

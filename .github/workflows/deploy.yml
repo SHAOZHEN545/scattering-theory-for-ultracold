@@ -36,6 +36,8 @@ jobs:
         run: npm run build
       - name: Check links, anchors, attachments and math
         run: npm run verify
+      - name: Check native Obsidian note embeds
+        run: npm run verify:links
       - uses: actions/upload-pages-artifact@v3
         with:
           path: public

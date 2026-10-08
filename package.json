@@ -15,7 +15,8 @@
     "plugins": "node ./quartz/bootstrap-cli.mjs plugin install && node scripts/adapt-quartz-plugins.mjs",
     "build": "node ./quartz/bootstrap-cli.mjs build -d \"Scattering theory notes\"",
     "preview": "node ./quartz/bootstrap-cli.mjs build -d \"Scattering theory notes\" --serve",
-    "verify": "node scripts/verify-site.mjs"
+    "verify": "node scripts/verify-site.mjs",
+    "verify:links": "node scripts/verify-transclusions.mjs"
   },
   "engines": {
     "npm": ">=10.9.2",
