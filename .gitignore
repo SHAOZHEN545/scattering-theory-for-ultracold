@@ -16,3 +16,8 @@ desktop.ini
 node_modules/
 public/
 .quartz-cache/
+.quartz/
+quartz/build-info.json
+
+# Local website QA artifacts
+.website-qa/

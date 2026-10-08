@@ -2,11 +2,30 @@
 
 供新项目的 agent 接续工作。目标是可长期维护的独立 Obsidian 知识库和自动更新的网站，而不是为当前几篇笔记制作一次性网页。
 
+## 最新执行状态（2026-10-08）
+
+以下状态取代本文迁移阶段的“尚未安装网站”记录：
+
+- 用户已在 Obsidian 验证此独立 vault；本轮保留其已有本地设置修改，未改动原九篇物理笔记和三个附件。
+- 当前目录实际为 `scattering-theory-for-ultracold`；远程已由用户建立并连接到 `https://github.com/SHAOZHEN545/scattering-theory-for-ultracold.git`，分支为 `main`。未改名。
+- 已安装并固定 Quartz **v5.0.0**（官方 release commit `ab346fa66a895e12d63a308e70ce330ba795822a`）。源码位于 `quartz/`，保留 MIT 许可证；npm 和 Quartz 插件分别由两个 lockfile 固定。Node.js 使用 24。
+- 网站直接读取 `Scattering theory notes/`。在同一目录新增 `index.md` 作为网站首页及 Obsidian 阅读入口；没有复制或转换第二份正文。
+- 已配置 MathJax、原生双链、折叠 callout、蓝色解释框、红色审阅框、章节导航、目录、全文搜索、关系图、悬停预览及深浅色模式。`note-properties` 插件负责解析标题和 frontmatter，必须保持启用；仅隐藏其属性展示。
+- `quartz/styles/custom.scss` 是通用 figure 和阅读样式适配：保留数值宽度、图片独立对齐、元数据控制的图注对齐、小号灰色图注以及窄屏长公式横向滚动。
+- 修复 Quartz 插件安装器对 Windows 空格路径的处理和安装失败时的退出状态。另由 `scripts/adapt-quartz-plugins.mjs` 对固定版本的 explorer、search、graph 内嵌脚本做 URL 适配：使用 Quartz 自带的 `getFullSlug`、`resolveRelative` 和共享 `fetchData`，避免跳到域名根目录。没有新增 Markdown 解析器或图片组件。`npm run plugins` 自动应用该适配，重复执行已验证。
+- `.github/workflows/deploy.yml` 在 `main` 的 push 或手动触发时安装依赖、安装固定插件、构建、校验并部署至 GitHub Pages；插件编译产物有缓存。仅成功构建和校验后进入部署。
+- `npm run plugins`、`npm run build`、`npm run verify` 全部通过。最终 10 篇源 Markdown 生成 12 个 HTML 页面；363 个本地链接、章节锚点和资源引用全部通过，未发现 MathJax 错误。
+- 浏览器实际验证了仓库子路径、搜索结果跳转、章节目录跳转、第 0 章 24 个初始折叠框及三张图、第 5 章 8 个红色审阅框、第 6 章长公式；390px 宽度下页面无横向溢出，10 个长显示公式可在公式框内滚动。
+- 临时新笔记验证了左、右、居中图片、独立的图注对齐、14.4px 灰色图注、图注内公式，以及新建子文件夹中的图片和搜索跳转。临时示例已移除。
+- 根目录维护资料、`.obsidian/`、网站源码均不作为网站正文发布。README 已更新为首次发布和日常维护说明。
+
+**尚需用户完成首次线上发布：** 本轮没有提交或推送到远程，也没有操作用户 GitHub 账户的 Pages 设置。按原先手动上传安排，用户提交并推送本轮改动到 `main`，然后在仓库 **Settings → Pages → Source** 选择 **GitHub Actions**。到 Actions 等待 `Publish scattering notes` 的 build 和 deploy 成功；如需，手动 Run workflow。目标地址为 `https://shaozhen545.github.io/scattering-theory-for-ultracold/`。实际远程部署和一次真实 push 更新尚未验证，不能把本地构建通过说成网站已经上线。
+
 ## 目标与命名
 
 内容定位：超冷原子与分子物理实验所需的散射理论，包括基本概念、渐近动力学、多通道表示、振幅、截面、分波、低能散射和 Feshbach 共振。
 
-当前文件夹名：`scattering-theory-for-ultracold-experiments`。用户指出这个名字没有明确体现原子分子物理或 AMO。随后建议 GitHub 名为 **`ultracold-amo-scattering-notes`**，但用户尚未明确选定，文件夹也尚未改名。不要把命名建议当作已完成事项。
+迁移阶段文件夹名曾记为 `scattering-theory-for-ultracold-experiments`；当前实际名为 `scattering-theory-for-ultracold`。用户指出早先名字没有明确体现原子分子物理或 AMO。随后建议 GitHub 名为 **`ultracold-amo-scattering-notes`**，但该建议未被明确选定或应用。不要把命名建议当作已完成事项。
 
 建议标题：**Scattering Theory for Ultracold Atomic and Molecular Physics**。
 建议简介：Scattering theory notes for experiments with ultracold atoms and molecules.
@@ -59,7 +78,7 @@
 - 原 vault 的 Obsidian Git `data.json` 没有迁移，避免继承旧仓库设置。
 - `.gitignore` 已忽略工作区状态、Git 插件本地配置、常见系统文件及未来网站构建产物。
 
-**尚未完成：Quartz 安装和配置、网站构建、浏览器视觉检查、GitHub Actions 部署。**
+上述为迁移阶段记录。Quartz 安装、配置、本地构建和浏览器检查现已完成，GitHub Actions 部署配置已就绪；首次真实线上部署待用户手动上传与启用 Pages，见本文最新执行状态。
 
 ## 插件与 CSS 的取舍
 
