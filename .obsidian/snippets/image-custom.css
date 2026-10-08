@@ -1,0 +1,77 @@
+/* =========================================================
+   方案 v5 (最终稳定版)：基于 Margin 的强力对齐
+   ========================================================= */
+
+/* --- 1. Callout 容器去边框、去背景 --- */
+.callout[data-callout="figure"] {
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 1em 0;
+}
+/* 隐藏标题栏 */
+.callout[data-callout="figure"] .callout-title {
+    display: none;
+}
+
+/* --- 2. 内容布局 (垂直排列) --- */
+.callout[data-callout="figure"] .callout-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* 图片和文字的间距 */
+    /* Obsidian 默认给 .callout-content 设了 overflow-x: auto，
+       这会让 overflow-y 也变成 auto；图注里的公式稍高一点就会冒出竖向滚动条 */
+    overflow: visible !important;
+}
+
+/* --- 3. 图注文字 (Caption) 对齐逻辑 --- */
+/* 默认两端对齐 */
+.callout[data-callout="figure"] .callout-content p {
+    width: 100%;
+    font-size: 0.9em;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin: 0;
+    text-align: justify; 
+}
+/* 针对图注的特殊指令 */
+.callout[data-callout="figure"][data-callout-metadata*="center"] .callout-content p { text-align: center; }
+.callout[data-callout="figure"][data-callout-metadata*="right"] .callout-content p { text-align: right; }
+.callout[data-callout="figure"][data-callout-metadata*="left"] .callout-content p { text-align: left; }
+
+
+/* --- 4. 图片 (Image) 对齐逻辑 [核心修改] --- */
+/* 不管图片外面有没有包裹 <p> 标签，我们直接选中 .internal-embed 
+   1. 强制 width: fit-content (抵消全局 CSS 的 100% 宽度)
+   2. 强制 display: block (为了让 margin: auto 生效)
+*/
+
+/* 通用重置：只要在 figure 里，图片容器就不要占满整行 */
+.callout[data-callout="figure"] .internal-embed {
+    width: fit-content !important; 
+    display: block !important;     
+}
+
+/* 情况 A: 图片带 |center -> 左右 margin 自动 (居中) */
+.callout[data-callout="figure"] .internal-embed:has(img[alt*="center"]) {
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+/* 情况 B: 图片带 |right -> 左 margin 自动 (居右) */
+.callout[data-callout="figure"] .internal-embed:has(img[alt*="right"]) {
+    margin-left: auto !important;
+    margin-right: 0 !important;
+}
+
+/* 情况 C: 图片带 |left 或默认 -> 右 margin 自动 (居左) */
+.callout[data-callout="figure"] .internal-embed:has(img[alt*="left"]) {
+    margin-left: 0 !important;
+    margin-right: auto !important;
+}
+
+/* 兜底：防止图片本身过大溢出 */
+.callout[data-callout="figure"] img {
+    max-width: 100%;
+}
