@@ -195,17 +195,17 @@ The collision only changes the label, from $|g\rangle$ to $|g_{\rm out}\rangle$,
 
 ## 7. The laboratory amplitude and the interaction picture
 
-Now look back at the structure of the calculation. This is where the formula of Scattering Theory 1, §2 comes from.
+Picture a marble rolling across a table with a small bump in the middle. It comes in on a straight line, swerves near the bump, and leaves on another straight line. Our particle has done the same: in on the free motion of $|g\rangle$, out on that of $|g_{\rm out}\rangle$. This section is the bookkeeping of those straight lines, and it is where the formula of Scattering Theory 1, §2 comes from.
 
 ### 7.1 The detector's question
 
-A detector asks for the amplitude of some accepted state. It cannot be a fixed state, since the packet flies past any fixed state. What a detector accepts is an outgoing free motion, which we name like the source's, by a label $|h\rangle$ at $t=0$. Then
+A detector far to the right asks: did the particle leave on a motion I accept? It cannot ask about a fixed state, since the packet flies past any fixed state, as the marble rolls past any spot on the table. What it accepts is an outgoing free motion, a straight line out, and we name it like the source's, by a label $|h\rangle$ at $t=0$. Then
 
 $$
 \boxed{\;\mathcal A_{hg}(t_f,t_i)=\langle h|\,e^{iH_0t_f/\hbar}\,e^{-iH(t_f-t_i)/\hbar}\,e^{-iH_0t_i/\hbar}\,|g\rangle\;}
 $$
 
-Read from right to left: from the incoming label out to the prepared state; through the collision; back to the detector's label. The free factors are not an extra assumption, just the definitions of what is prepared and what is detected. By §6.3, $\mathcal A_{hg}\to\langle h|g_{\rm out}\rangle$.
+This is the most familiar object in quantum mechanics, $\langle b|A|a\rangle$: act on a state, take the overlap with another. Here $|a\rangle=e^{-iH_0t_i/\hbar}|g\rangle$ is the prepared state, $A=e^{-iH(t_f-t_i)/\hbar}$ carries it to $t_f$, and $\langle b|=\langle h|e^{iH_0t_f/\hbar}$ is the bra of $|b\rangle=e^{-iH_0t_f/\hbar}|h\rangle$, the state the detector accepts at $t_f$. Prepare, evolve, project. The free factors only turn labels into actual states; they are definitions, not an extra assumption. By §6.3, $\mathcal A_{hg}\to\langle h|g_{\rm out}\rangle$.
 
 > [!question]- A real detector is a counter on the right, not a projection onto one packet. Does this still apply?
 > Yes: sum $|\langle h|g_{\rm out}\rangle|^2$ over all right-moving labels and you get $P_{\rm T}$. At late times "on the right" and "moving right" are the same question. See §S6.1.
@@ -219,21 +219,24 @@ $$
 |\psi_I(t)\rangle\equiv e^{iH_0t/\hbar}|\psi(t)\rangle=U_I(t,t_i)|g\rangle .
 $$
 
-If the barrier were switched off at time $t$, the particle would continue as $e^{-iH_0t'/\hbar}|\psi_I(t)\rangle$. So **$|\psi_I(t)\rangle$ is the label of the free motion the particle is on at time $t$**: $|g\rangle$ before the collision, $|g_{\rm out}\rangle$ after. To see how it changes, multiply the retarded form of §6.1 by $e^{iH_0t/\hbar}$:
+Flatten the bump at some instant $t$, and the marble flies off along the tangent to its path at that moment. Quantum mechanically, switch off the barrier at $t$ and the particle continues as $e^{-iH_0t'/\hbar}|\psi_I(t)\rangle$. So **$|\psi_I(t)\rangle$ is the label of the free motion the particle is on at time $t$**, the tangent line named at $t=0$: $|g\rangle$ before the collision, $|g_{\rm out}\rangle$ after. Far from the bump the tangent is the path itself and stays put; near it, the tangent swings round. To see how it swings, multiply the retarded form of §6.1 by $e^{iH_0t/\hbar}$:
 
 $$
 |\psi_I(t)\rangle=|g\rangle-\frac{i}{\hbar}\int_{-\infty}^{t}dt'\;V_I(t')\,|\psi_I(t')\rangle,\qquad
 V_I(t)=e^{iH_0t/\hbar}Ve^{-iH_0t/\hbar}.
 $$
 
-This is the equation for $U_I$ in Scattering Theory 1, §2, and now we can read it: each term is the wave radiated at $t'$, folded back to $t=0$. The label collects radiation while the source is on and stops changing when the pulse is over. The Schrödinger state follows the particle along its whole path, and its phases keep turning forever; the interaction-picture state changes only during the collision.
+This is the equation for $U_I$ in Scattering Theory 1, §2, and now we can read it: each term is the wave radiated at $t'$, folded back to $t=0$. The label collects radiation while the source is on and freezes when the pulse is over. The Schrödinger state is the marble, which rolls on forever while its phases keep turning; the interaction-picture state is the tangent line, which moves only during the collision.
 
 > [!info]- The Born approximation
 > Replace $|\psi_I(t')\rangle$ by $|g\rangle$ on the right-hand side: the source is driven by the incident wave alone. Derivations: §S6.2.
 
+> [!info]- The classical label, made precise
+> The tangent line is Lagrange's variation of constants, the idea behind the osculating orbits of celestial mechanics: its label moves only where the force acts. See §S6.3.
+
 ### 7.3 The $S$ operator
 
-Letting the preparation recede into the past and the detection into the future,
+Now push the source back into the remote past and the detector into the remote future. The tangent line is frozen at both ends, so the result settles (why: §7.5):
 
 $$
 S|g\rangle\equiv\lim_{\substack{t_f\to+\infty\\ t_i\to-\infty}}U_I(t_f,t_i)\,|g\rangle=|g_{\rm out}\rangle,
@@ -241,7 +244,7 @@ S|g\rangle\equiv\lim_{\substack{t_f\to+\infty\\ t_i\to-\infty}}U_I(t_f,t_i)\,|g\
 S|k\rangle=\tau(|k|)\,|k\rangle+r(|k|)\,|{-k}\rangle .
 $$
 
-$S$ connects only equal energies and contains neither the apparatus nor the times: it describes the barrier alone. And this table on the reference states is all we need. Whatever packet a source prepares, its label is some $|g\rangle=\int dk\,g(k)|k\rangle$, and by linearity
+For the marble, $S$ is the rule "in on this line, out on that one"; quantum mechanically it is a table of amplitudes. It connects only equal energies and contains neither the apparatus nor the times: it describes the barrier alone. And this table on the reference states is all we need. Whatever packet a source prepares, its label is some $|g\rangle=\int dk\,g(k)|k\rangle$, and by linearity
 
 $$
 S|g\rangle=\int dk\;g(k)\,S|k\rangle .
@@ -251,17 +254,17 @@ The experiment supplies $g(k)$; the barrier supplies $S|k\rangle$. This is why s
 
 ### 7.4 The whole calculation in one picture
 
-Step back, and the procedure of §§4–7 turns out to be an old one. Nobody describes a classical collision by where the particle is at $t=0$, in the middle of it. One gives the straight line it comes in on and the straight line it leaves on, and the collision is the rule that takes one line to the other. That is all $|g\rangle$, $|g_{\rm out}\rangle$, and $S$ are. Classically the rule can be drawn, and we draw it in two dimensions, where a trajectory can visibly bend; in our 1D problem the only outgoing directions are left and right.
+Nobody describes the marble by where it is in the middle of its swerve, only by the line it comes in on and the line it leaves on. That is all $|g\rangle$, $|g_{\rm out}\rangle$, and $S$ are, and for the marble it can be drawn. We draw it in two dimensions, where a path can visibly bend; in our 1D problem the only outgoing directions are left and right.
 
 > [!figure]
 > ![[ST0_fig_classical_analog.svg|center|600]]
 > Each observed ray is named by its free extension (dashed) into the interaction region near $t=0$: $|g\rangle$ for the incoming ray, $|h\rangle$ for the outgoing ray a detector accepts. The real trajectory (orange) bends inside the region. $S_{hg}=\langle h|S|g\rangle$ is the amplitude that the collision switches $g$ into $h$; in quantum mechanics $S|g\rangle$ is a superposition of many outgoing rays (grey fan).
 
-Read the figure with the quantum steps in mind. Extend the incoming ray freely to $t=0$, as if nothing were there: that is the blue dot, $|g\rangle$. Do the same backwards with an outgoing ray: the green dot, $|h\rangle$. The real particle (orange) is at neither dot at $t=0$; it is in the middle of the bend.
+Extend the incoming ray freely to $t=0$, as if nothing were there: the blue dot, $|g\rangle$. Extend an outgoing ray back the same way: the green dot, $|h\rangle$. The real particle (orange) is at neither; it is in the middle of the bend. Now each piece of this section is something to point at:
 
-- **Laboratory amplitude**, right to left: from the blue dot out to the source, along the real path, back along the green dashed line to the green dot.
-- **Interaction picture**: the line tangent to the orange curve at time $t$, extended to $t=0$. It turns only inside the interaction region (blue circle), i.e. around $t=0$ (red circle).
-- **$S$**: the switchboard in the red circle. A quantum particle leaves along several rays at once (grey fan).
+- **Laboratory amplitude** (§7.1), right to left: from the blue dot out along the dashed line to the source, along the real path, back along the green dashed line to the green dot.
+- **Interaction picture** (§7.2): the tangent to the orange curve at time $t$, extended to $t=0$. It swings only inside the interaction region (blue circle), i.e. around $t=0$ (red circle).
+- **$S$** (§7.3): the switchboard in the red circle. A quantum particle leaves along several rays at once (grey fan).
 
 ### 7.5 Why the folded switchboard has a limit
 
@@ -271,7 +274,7 @@ $$
 \langle k'|U(t_f,t_i)|k\rangle\;\simeq\;\langle k'|S|k\rangle\;e^{-iE_k(t_f-t_i)/\hbar}.
 $$
 
-**The Schrödinger table is the $S$ table times a clock that never stops.** The clock is the free motion of the packet running off to infinity, and it is there even without a barrier. The interaction picture removes it at both ends: in the figure, both ends become dots near $t=0$ that stay put however early we prepare and however late we detect, and in between the label changes only while the particle is in the blue circle. That is why the limit exists, and what Scattering Theory 1, §2 means by "factoring out the known reference motion".
+**The Schrödinger table is the $S$ table times a clock that never stops.** The clock is the free motion of the packet running off to infinity: the marble rolls on, bump or no bump. The interaction picture removes it at both ends: in the figure, both ends become dots near $t=0$ that stay put however early we prepare and however late we detect, and in between the label changes only while the particle is in the blue circle. That is why the limit exists, and what Scattering Theory 1, §2 means by "factoring out the known reference motion".
 
 > [!important]- The label comes to rest only if the potential falls off faster than $1/r$
 > This covers every interaction between ultracold atoms and molecules. For Coulomb the where-and-when part of the label drifts as $\ln t$, and $S$ must be defined relative to distorted reference motions. More on this, and on unitarity, the on-shell property, and the mathematics behind the picture: §S7.
