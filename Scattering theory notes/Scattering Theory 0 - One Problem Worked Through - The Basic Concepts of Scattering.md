@@ -86,7 +86,13 @@ To find out, we pose the experiment as it happens: prepare a particle **far to t
 
 ### 4.1 A free packet
 
-Far from the barrier the particle moves freely,
+Let's consider such a packet:
+
+$$
+|g\rangle=\int dk \,g(k)|k\rangle
+$$
+
+Far from the barrier the particle moves freely, so its free evolution $e^{-iH_0 t/\hbar}|g\rangle$ gives
 
 $$
 \psi_0(x,t)=\int dk\;g(k)\,e^{-iE_kt/\hbar}\,\langle x|k\rangle ,
@@ -165,13 +171,13 @@ Read it from right to left. At each earlier time $t'$ the barrier acts on the wa
 
 ### 6.2 Before the collision
 
-When is the source on? The wave at the origin is $\psi(0,t')\approx\tau(k_0)\,\psi_0(0,t')$, the free packet passing by: a **pulse**, appreciable only for $|t'|\lesssim t_c$. For $t\ll-t_c$ the retarded integral covers only times before the packet arrives, when the source is off. Nothing has been radiated, so
+When is the source on? The wave at the origin is $\psi(0,t')\approx\tau(k_0)\,\psi_0(0,t')$, which is the free packet passing by -- it is a **pulse**, appreciable only for $|t'|\lesssim t_c$. For $t\ll-t_c$ the retarded integral covers only times before the packet arrives, when the source is off. Nothing has been radiated, so no scattered wave:
 
 $$
-\big\|\,\psi(t)-e^{-iH_0t/\hbar}|g\rangle\,\big\|\;\xrightarrow{\;t\to-\infty\;}\;0 .
+\lim _{t\to-\infty}\big\|\,\psi(t)-e^{-iH_0t/\hbar}|g\rangle\,\big\|=\lim_{t\to-\infty}\big\|\psi_{\rm sc}\big\|=0 .
 $$
 
-Our guess is the prepared state, hence the state of the experiment. Notice what did the work: not a special property of the delta function but causality. Nothing can be radiated before something reaches the source, and that holds for any potential of finite range.
+Our guess indeed matches the prepared state, hence it is *the* solution. Notice what did the work: not a special property of the delta function but causality. Nothing can be radiated before something reaches the source, and that holds for any potential of finite range.
 
 > [!important]- The slow tail of a Gaussian
 > A Gaussian contains every momentum, including some too slow ever to arrive, so strictly the source is never quite off. But the slow components near $k=0$ have weight $|g(0)|^2\propto e^{-k_0^2/2\sigma_k^2}$, utterly negligible for $\sigma_k\ll k_0$. The estimate, and the limit $t_i\to-\infty$ done carefully: §S3.2.
@@ -199,7 +205,11 @@ Picture a marble rolling across a table with a small bump in the middle. It come
 
 ### 7.1 The detector's question
 
-A detector far to the right asks: did the particle leave on a motion I accept? It cannot ask about a fixed state, since the packet flies past any fixed state, as the marble rolls past any spot on the table. What it accepts is an outgoing free motion, a straight line out, and we name it like the source's, by a label $|h\rangle$ at $t=0$. Then
+A detector far to the right asks: did the particle leave on a motion I accept? 
+
+It cannot ask about a fixed state (e.g. a packet sitting at $x=x_0$), since the packet flies past any fixed state, as the marble rolls past any spot on the table. 
+
+What it accepts is an outgoing free motion, a straight line out, and we name it like the source's, by a label $|h\rangle$ at $t=0$. Then
 
 $$
 \boxed{\;\mathcal A_{hg}(t_f,t_i)=\langle h|\,e^{iH_0t_f/\hbar}\,e^{-iH(t_f-t_i)/\hbar}\,e^{-iH_0t_i/\hbar}\,|g\rangle\;}
@@ -219,7 +229,9 @@ $$
 |\psi_I(t)\rangle\equiv e^{iH_0t/\hbar}|\psi(t)\rangle=U_I(t,t_i)|g\rangle .
 $$
 
-Flatten the bump at some instant $t$, and the marble flies off along the tangent to its path at that moment. Quantum mechanically, switch off the barrier at $t$ and the particle continues as $e^{-iH_0t'/\hbar}|\psi_I(t)\rangle$. So **$|\psi_I(t)\rangle$ is the label of the free motion the particle is on at time $t$**, the tangent line named at $t=0$: $|g\rangle$ before the collision, $|g_{\rm out}\rangle$ after. Far from the bump the tangent is the path itself and stays put; near it, the tangent swings round. To see how it swings, multiply the retarded form of §6.1 by $e^{iH_0t/\hbar}$:
+Flatten the bump at some instant $t$, and the marble flies off along the tangent to its path at that moment. Quantum mechanically, switch off the barrier at $t$ and the particle continues as $e^{-iH_0t'/\hbar}|\psi_I(t)\rangle$. 
+
+So **$|\psi_I(t)\rangle$ is the label of the free motion the particle is on at time $t$**, the *tangent* line named at $t=0$: $|g\rangle$ before the collision, $|g_{\rm out}\rangle$ after. Far from the bump the tangent is the path itself and stays put; near it, the tangent swings round. To see how it swings, multiply the retarded form of §6.1 by $e^{iH_0t/\hbar}$:
 
 $$
 |\psi_I(t)\rangle=|g\rangle-\frac{i}{\hbar}\int_{-\infty}^{t}dt'\;V_I(t')\,|\psi_I(t')\rangle,\qquad
@@ -244,17 +256,23 @@ S|g\rangle\equiv\lim_{\substack{t_f\to+\infty\\ t_i\to-\infty}}U_I(t_f,t_i)\,|g\
 S|k\rangle=\tau(|k|)\,|k\rangle+r(|k|)\,|{-k}\rangle .
 $$
 
-For the marble, $S$ is the rule "in on this line, out on that one"; quantum mechanically it is a table of amplitudes. It connects only equal energies and contains neither the apparatus nor the times: it describes the barrier alone. And this table on the reference states is all we need. Whatever packet a source prepares, its label is some $|g\rangle=\int dk\,g(k)|k\rangle$, and by linearity
+For the marble, $S$ is the rule "in on this line, out on that one"; quantum mechanically it is a table of amplitudes. It connects only **equal energies** and contains neither the apparatus nor the times: it describes the barrier alone. And this table on the reference states is all we need. Whatever packet a source prepares, its label is some $|g\rangle=\int dk\,g(k)|k\rangle$, and by linearity
 
 $$
 S|g\rangle=\int dk\;g(k)\,S|k\rangle .
 $$
 
-The experiment supplies $g(k)$; the barrier supplies $S|k\rangle$. This is why scattering theory computes $S$ on the reference states and never needs a particular packet.
+The experiment supplies $g(k)$; the barrier supplies $S|k\rangle$. 
+
+This is why scattering theory computes $S$ on the reference states and never needs a particular packet.
 
 ### 7.4 The whole calculation in one picture
 
-Nobody describes the marble by where it is in the middle of its swerve, only by the line it comes in on and the line it leaves on. That is all $|g\rangle$, $|g_{\rm out}\rangle$, and $S$ are, and for the marble it can be drawn. We draw it in two dimensions, where a path can visibly bend; in our 1D problem the only outgoing directions are left and right.
+Nobody describes the marble by where it is in the middle of its swerve, but only by the line it comes in on and the line it leaves on. 
+
+And that is all $|g\rangle$, $|g_{\rm out}\rangle$, and $S$ are, and for the marble it can be drawn. 
+
+Here we draw it in two dimensions, where a path can visibly bend; in our 1D problem the only outgoing directions are left and right.
 
 > [!figure]
 > ![[ST0_fig_classical_analog.svg|center|600]]
