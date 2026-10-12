@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Scattering Theory 0, §1: a particle of energy E incident from the left on the barrier V(x) = λ δ(x).
+  The delta function is drawn as a narrow peak (height -> infinity, width -> 0, area λ).
+  Coordinates: x = 0 at px 360, V = 0 at py 330. Colors and line styles are set in <style>.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="400" viewBox="0 0 720 400">
+  <style>
+    .bg        { fill: #ffffff; }
+    .label     { font-family: "STIX Two Text", "Times New Roman", serif; font-size: 18px; fill: #222222; }
+    .small     { font-family: "STIX Two Text", "Times New Roman", serif; font-size: 15px; fill: #555555; }
+    .axis      { stroke: #222222; stroke-width: 1.5; fill: none; }
+    .barrier   { stroke: #185FA5; stroke-width: 3; fill: #185FA5; fill-opacity: 0.12; }
+    .energy    { stroke: #888780; stroke-width: 1.5; stroke-dasharray: 7 5; fill: none; }
+    .incident  { stroke: #D85A30; stroke-width: 2.5; fill: none; }
+    .reflected { stroke: #D85A30; stroke-width: 2; stroke-dasharray: 5 4; fill: none; }
+    .transmit  { stroke: #1D9E75; stroke-width: 2.5; fill: none; }
+    .wave-i    { stroke: #D85A30; stroke-width: 1.5; fill: none; opacity: 0.55; }
+    .wave-t    { stroke: #1D9E75; stroke-width: 1.5; fill: none; opacity: 0.55; }
+  </style>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="720" height="400"/>
+
+  <g id="axes">
+    <line class="axis" x1="50" y1="330" x2="680" y2="330" marker-end="url(#arrow)"/>
+    <text class="label" x="690" y="336" font-style="italic">x</text>
+    <line class="axis" x1="360" y1="345" x2="360" y2="335"/>
+    <text class="small" x="360" y="364" text-anchor="middle">0</text>
+  </g>
+
+  <g id="barrier">
+    <path class="barrier" d="M290,330 L336,330 C348,330 352,100 360,100 C368,100 372,330 384,330 L430,330"/>
+    <text class="label" x="378" y="96"><tspan font-style="italic">V</tspan>(<tspan font-style="italic">x</tspan>) = <tspan font-style="italic">λ δ</tspan>(<tspan font-style="italic">x</tspan>)</text>
+    <text class="small" x="378" y="118">infinitely high and thin,</text>
+    <text class="small" x="378" y="136">with area <tspan font-style="italic">λ</tspan></text>
+  </g>
+
+  <g id="energy">
+    <line class="energy" x1="70" y1="245" x2="650" y2="245"/>
+    <text class="small" x="600" y="239"><tspan font-style="italic">E</tspan> &gt; 0</text>
+  </g>
+
+  <g id="waves">
+    <path class="wave-i" d="M80,285 q9,-14 18,0 t18,0 t18,0 t18,0 t18,0 t18,0 t18,0 t18,0 t18,0 t18,0 t18,0 t18,0 t18,0 t18,0"/>
+    <path class="wave-t" d="M388,285 q9,-9 18,0 t18,0 t18,0 t18,0 t18,0 t18,0 t18,0 t18,0 t18,0 t18,0 t18,0 t18,0 t18,0 t18,0"/>
+  </g>
+
+  <g id="arrows">
+    <line class="incident" x1="95" y1="190" x2="300" y2="190" marker-end="url(#arrow)"/>
+    <text class="label" x="110" y="178">incident <tspan font-style="italic">e</tspan><tspan dy="-8" font-size="13" font-style="italic">ikx</tspan></text>
+    <line class="reflected" x1="300" y1="215" x2="95" y2="215" marker-end="url(#arrow)"/>
+    <text class="small" x="110" y="237">reflected <tspan font-style="italic">r e</tspan><tspan dy="-7" font-size="11">−</tspan><tspan font-size="11" font-style="italic">ikx</tspan></text>
+    <line class="transmit" x1="420" y1="190" x2="625" y2="190" marker-end="url(#arrow)"/>
+    <text class="label" x="440" y="178">transmitted <tspan font-style="italic">τ e</tspan><tspan dy="-8" font-size="13" font-style="italic">ikx</tspan></text>
+  </g>
+</svg>

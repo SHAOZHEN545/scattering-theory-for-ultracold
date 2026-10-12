@@ -4,9 +4,9 @@ This note collects the details of the delta-barrier problem of [[Scattering Theo
 |---|---|
 | §S1, the stationary solution in detail | ST0 §2 |
 | §S2, the free Gaussian packet | ST0 §4 |
-| §S3, the time-dependent solution in detail | ST0 §5 |
-| §S4, the general solution with both incidence directions | ST0 §5.1 |
-| §S5, probabilities and the steady beam | ST0 §6 |
+| §S3, the time-dependent solution in detail | ST0 §5–6 |
+| §S4, the general solution with both incidence directions | ST0 §5 |
+| §S5, probabilities and the steady beam | ST0 §8 |
 | §S6, the interaction picture in detail | ST0 §7.1–7.2 |
 | §S7, why the folded switchboard has a limit: further details | ST0 §7.5 |
 
@@ -56,7 +56,7 @@ The two matching conditions at the origin (§S1.2) fix the two outgoing amplitud
 >
 > *Generality.* The opposite choice $A=0$, $D=1$ describes a source on the right, and every solution at this energy is a superposition of the two (§S4).
 >
-> *Incoming and outgoing in time.* The words "incoming" and "outgoing" are justified here by the direction of the current in a stationary state. In ST0 §5.2 the same classification appears directly in time: in a wave packet built from these terms, the $A$ and $D$ parts are present only before the collision, and the $B$ and $C$ parts only after it.
+> *Incoming and outgoing in time.* The words "incoming" and "outgoing" are justified here by the direction of the current in a stationary state. In ST0 §6.3 the same classification appears directly in time: in a wave packet built from these terms, the $A$ and $D$ parts are present only before the collision, and the $B$ and $C$ parts only after it.
 
 ### S1.2 The matching conditions
 
@@ -207,7 +207,7 @@ $$
 
 **The width is smallest at $t=0$, and the phase says why.** At $t=0$, $\sigma_x\sigma_k=1/2$, the minimum allowed by the uncertainty principle, and the phase is flat: every part of the packet has the same wavenumber $k_0$. For $t>0$ the faster components are in front, and the packet spreads. For $t<0$ they are *behind* and catching up, so the packet is **converging**. At large $|t|$ the part of the packet at $x$ moves with velocity $x/t$, as if every component passed the origin at $t=0$. The packet prepared at $t_i$ is therefore wider than $|g\rangle$, and it would be sharpest at $x=0$, $t=0$ if nothing were in its way.
 
-So $|g\rangle$ is a snapshot of the free motion at the moment it would pass the origin with its smallest width. It is not the state of the real particle at $t=0$, which is in the middle of the collision (ST0 §5.3).
+So $|g\rangle$ is a snapshot of the free motion at the moment it would pass the origin with its smallest width. It is not the state of the real particle at $t=0$, which is in the middle of the collision (§S3.4).
 
 ### S2.3 The label
 
@@ -233,29 +233,17 @@ The packet runs away from the origin faster than it spreads, so by choosing $t_i
 
 ## S3. The time-dependent solution
 
-### S3.1 The barrier as a source
+### S3.1 The retarded form, derived
 
-Subtracting the free equation $(i\hbar\partial_t-H_0)\psi_0=0$ from the exact one $(i\hbar\partial_t-H_0)\psi=V\psi$,
-
-$$
-(i\hbar\partial_t-H_0)\,\psi_{\rm sc}=V\psi .
-$$
-
-The scattered wave obeys the free Schrödinger equation with a **source** $V\psi$. The solution of ST0 §5.1 gives it in retarded form:
+ST0 §6.1 writes the scattered wave in retarded form,
 
 $$
-\boxed{\;\psi_{\rm sc}(t)=-\frac{i}{\hbar}\int_{-\infty}^{t}dt'\;e^{-iH_0(t-t')/\hbar}\,V\psi(t')\;}
+\psi_{\rm sc}(t)=-\frac{i}{\hbar}\int_{-\infty}^{t}dt'\;e^{-iH_0(t-t')/\hbar}\,V\psi(t'),
 $$
 
-Read it from right to left. At each earlier time $t'$ the potential acts on the wave that is there, $V\psi(t')$, and creates a little new wave, which then moves freely from $t'$ to $t$. The scattered wave at time $t$ is the sum of these contributions from all times before $t$. For the delta barrier $V\psi(t')=\lambda\,\psi(0,t')\,|x{=}0\rangle$: **the barrier is a point source at the origin, whose strength at each moment is the amplitude $\psi(0,t')$ of the wave hitting it.**
+and reads the barrier as a point source. Here we derive this form from the solution of ST0 §5, and add two remarks.
 
-This also explains the $|x|$ in $\phi_k$. A point source at the origin driven at a fixed energy radiates $e^{ik|x|}$, a wave running away from it on both sides, and $r\,e^{ik|x|}$ is exactly this radiation. Superposing such steady emissions with the weights $g(k)$ gives a source that is on only while the packet passes. "Outgoing" in the stationary problem means "caused by the source" in time.
-
-![[ST0_fig_barrier_as_source.svg|center|600]]
-
-*The barrier as a source. The incident packet (red) reaches the origin around $t=0$. The barrier radiates to both sides (green) with strength proportional to $\psi(0,t')$, so only while the packet is on it. Before that nothing has reached the barrier and nothing has been radiated. Afterwards the radiation on the left is the reflected wave; on the right it adds to the incident packet, which continues past the barrier (grey dashed), to form the transmitted wave.*
-
-> [!NOTE]- Derivation: the retarded form, from the solution of ST0 §5.1
+> [!NOTE]- Derivation: the retarded form, from the solution of ST0 §5
 > **The Green function.** The radiation of a point source at the origin, driven at energy $E=\hbar^2k^2/2m$, solves $\big(E+\frac{\hbar^2}{2m}\partial_x^2\big)G=\delta(x)$. Since $\partial_x^2e^{ik|x|}=-k^2e^{ik|x|}+2ik\,\delta(x)$, the outgoing solution is
 > $$
 > G_0^{(+)}(x,0;E)=\langle x|\frac{1}{E-H_0+i0}|x{=}0\rangle=-\frac{im}{\hbar^2k}\,e^{ik|x|}.
@@ -277,7 +265,7 @@ This also explains the $|x|$ in $\phi_k$. A point source at the origin driven at
 > \psi_{\rm sc}(t)=-\frac{i}{\hbar}\int_0^\infty d\tau\;e^{-iH_0\tau/\hbar}\,V\!\int dk\,g(k)\,e^{-iE_k(t-\tau)/\hbar}\phi_k
 > =-\frac{i}{\hbar}\int_0^\infty d\tau\;e^{-iH_0\tau/\hbar}\,V\psi(t-\tau).
 > $$
-> With $t'=t-\tau$ this is the boxed formula. The restriction $\tau>0$, i.e. $t'<t$, comes directly from the $+i0$. The retarded form is therefore not an extra assumption: it is the $e^{ik|x|}$ of the eigenstates, rewritten in time.
+> With $t'=t-\tau$ this is the retarded form. The restriction $\tau>0$, i.e. $t'<t$, comes directly from the $+i0$. The retarded form is therefore not an extra assumption: it is the $e^{ik|x|}$ of the eigenstates, rewritten in time.
 
 > [!INFO]- Remark: outgoing means causal, and the stationary-phase picture
 > The same physics, in the two languages:
@@ -292,40 +280,38 @@ This also explains the $|x|$ in $\phi_k$. A point source at the origin driven at
 > $$
 > \psi_{\rm sc}(x,t)=\int_0^\infty\frac{dk}{\sqrt{2\pi}}\,r(k)\,g(k)\,e^{i\Phi(k)},\qquad \Phi(k)=k|x|-\frac{\hbar k^2t}{2m},
 > $$
-> the integral is dominated by the $k$ at which the phase is stationary, $\Phi'(k)=0$, i.e. $|x|=\hbar kt/m$. The component of speed $v=\hbar k/m$ is found at distance $vt$ from the origin: it left the barrier at $t=0$, when the packet hit it. For $t<0$ there is no such point, since $|x|\ge0$: the radiation has not been emitted yet. Without the absolute value the stationary point would be $x=vt<0$, an ordinary free packet coming in from the left that has existed forever and was emitted by nothing. (This is the half-line argument of ST0 §5.2 in another form.)
+> the integral is dominated by the $k$ at which the phase is stationary, $\Phi'(k)=0$, i.e. $|x|=\hbar kt/m$. The component of speed $v=\hbar k/m$ is found at distance $vt$ from the origin: it left the barrier at $t=0$, when the packet hit it. For $t<0$ there is no such point, since $|x|\ge0$: the radiation has not been emitted yet. Without the absolute value the stationary point would be $x=vt<0$, an ordinary free packet coming in from the left that has existed forever and was emitted by nothing. (This is the half-line argument of ST0 §6.3 in another form.)
 >
 > Including the phase of $r(k)$ in $\Phi$ shifts the stationary point to $|x|=vt-\frac{d\arg r}{dk}$: the emission is slightly late. This is the Wigner time delay, stored in the phase of $r(k)$, and it is the offset between the dots in the figure of ST0 §7.4.
 >
 > One caveat: nonrelativistic free motion has no sharp light cone, since $e^{-iH_0\tau/\hbar}$ spreads a point instantly over all space. "Causal" here means that only sources at earlier times contribute, not that the radiation travels at a fixed speed.
 
 > [!INFO]- Remark: beyond the delta barrier
-> Nothing in the boxed formula is special to the delta function. For a general $V$, the source $V(x)\psi(x,t')$ is spread over the region where $V\neq0$, and it is negligible until the incident packet reaches that region. In three dimensions the radiation from a point $\mathbf r'$ is the outgoing spherical wave $e^{ik|\mathbf r-\mathbf r'|}/|\mathbf r-\mathbf r'|$, and far away the total scattered wave becomes $f\,e^{ikr}/r$. The delta barrier only makes the source a single point.
+> Nothing in the retarded form is special to the delta function. For a general $V$, the source $V(x)\psi(x,t')$ is spread over the region where $V\neq0$, and it is negligible until the incident packet reaches that region. In three dimensions the radiation from a point $\mathbf r'$ is the outgoing spherical wave $e^{ik|\mathbf r-\mathbf r'|}/|\mathbf r-\mathbf r'|$, and far away the total scattered wave becomes $f\,e^{ikr}/r$. The delta barrier only makes the source a single point.
 >
 > Replacing the exact $\psi(t')$ in the source by the incident $\psi_0(t')$, i.e. letting the source be driven by the incident wave alone, gives the Born approximation.
 
 ### S3.2 Before the collision
 
-The source strength is the exact wave at the origin. From the solution, with $\phi_k(0)=\tau(k)/\sqrt{2\pi}$,
+ST0 §6.2 uses that the source is a pulse. Explicitly, with $\phi_k(0)=\tau(k)/\sqrt{2\pi}$,
 
 $$
 \psi(0,t')=\int_0^\infty\frac{dk}{\sqrt{2\pi}}\,\tau(k)\,g(k)\,e^{-iE_kt'/\hbar}\approx\tau(k_0)\,\psi_0(0,t'),
 $$
 
-since $\tau(k)$ hardly varies across the narrow packet. By §S2.1, $|\psi_0(0,t')|^2\propto\exp\!\big[-v_0^2t'^2/2\sigma_x(t')^2\big]$. This is a **pulse** centered at $t'=0$, negligible once $|t'|\gg t_c=\sigma_x/v_0$. The barrier radiates only during this pulse.
-
-For $t\ll-t_c$, the retarded formula of §S3.1 involves only sources at $t'<t$, where the pulse is negligible. Nothing has reached the barrier yet, so nothing has been radiated, and $\psi_{\rm sc}(t)\to0$. This is the conclusion of ST0 §5.2, reached from the source picture.
+since $\tau(k)$ hardly varies across the narrow packet, and by §S2.1 $|\psi_0(0,t')|^2\propto\exp\!\big[-v_0^2t'^2/2\sigma_x(t')^2\big]$: a pulse centered at $t'=0$, negligible once $|t'|\gg t_c=\sigma_x/v_0$.
 
 > [!NOTE]- Remark: how small is "negligible"?
 > For $t_c\ll|t'|\ll t_R$ the packet has not yet spread, $\sigma_x(t')\simeq\sigma_x$, and the pulse falls off as $\exp(-t'^2/2t_c^2)$. At still earlier times the pulse is dominated by the components with $k\approx0$: they hardly move, so they sit near the barrier at all times. The pulse then decays only as $1/|t'|$, but with the tiny prefactor $|g(0)|^2\propto e^{-k_0^2/2\sigma_k^2}$. This is the price of using a Gaussian, which strictly speaking contains all momenta, including those too slow ever to arrive; for $\sigma_k\ll k_0$ it is utterly negligible.
 
 > [!NOTE]- Derivation: the limit $t_i\to-\infty$, done carefully
-> Let $\psi_{\rm exp}(t)$ be the true solution with $\psi_{\rm exp}(t_i)=e^{-iH_0t_i/\hbar}|g\rangle$. It and the solution $\psi(t)$ of ST0 §5.1 solve the same Schrödinger equation, and $e^{-iHt/\hbar}$ is unitary, so the distance between them does not depend on time. Evaluating it at $t_i$,
+> Let $\psi_{\rm exp}(t)$ be the true solution with $\psi_{\rm exp}(t_i)=e^{-iH_0t_i/\hbar}|g\rangle$. It and the solution $\psi(t)$ of ST0 §5 solve the same Schrödinger equation, and $e^{-iHt/\hbar}$ is unitary, so the distance between them does not depend on time. Evaluating it at $t_i$,
 > $$
 > \big\|\psi_{\rm exp}(t)-\psi(t)\big\|=\big\|\,e^{-iH_0t_i/\hbar}|g\rangle-\psi(t_i)\,\big\|\;\xrightarrow{\;t_i\to-\infty\;}\;0 .
 > $$
-> The last step is the early-time limit of ST0 §5.2. So the true state converges to $\psi(t)$, at every $t$.
+> The last step is the early-time limit of ST0 §6.2. So the true state converges to $\psi(t)$, at every $t$.
 
-**The coefficient is the label.** The exact state is built from the eigenstates of $H$ with the **same** coefficient function $g(k)$ that builds the free packet out of plane waves. This is the reduction promised in ST0 §4.2: once we know the eigenstate $\phi_k$ that each reference state $|k\rangle$ turns into, we know the exact solution for every packet. It works because the incident part of $\phi_k$ is exactly the plane wave $e^{ikx}$, with coefficient $1$. The eigenstates are labelled by the free state they come from, and the packet is named by its free motion at the reference time, so the two names match.
+**The coefficient is the label.** The exact state is built from the eigenstates of $H$ with the **same** coefficient function $g(k)$ that builds the free packet out of plane waves. This is the payoff noted in ST0 §5: once we know the eigenstate $\phi_k$ that each reference state $|k\rangle$ turns into, we know the exact solution for every packet. It works because the incident part of $\phi_k$ is exactly the plane wave $e^{ikx}$, with coefficient $1$. The eigenstates are labelled by the free state they come from, and the packet is named by its free motion at the reference time, so the two names match.
 
 ### S3.3 After the collision
 
@@ -342,7 +328,7 @@ $$
 \langle k'|g_{\rm sc}\rangle=r(|k'|)\,g(|k'|)\qquad\text{for both signs of }k' ,
 $$
 
-so that $|g_{\rm out}\rangle=|g\rangle+|g_{\rm sc}\rangle$ reproduces ST0 §5.2. The time integral over the pulse produces $\delta(E_{k'}-E_k)$: the barrier radiates at the energy of the wave that drives it, so a component $k$ can only feed $k'=\pm k$.
+so that $|g_{\rm out}\rangle=|g\rangle+|g_{\rm sc}\rangle$ reproduces ST0 §6.3. The time integral over the pulse produces $\delta(E_{k'}-E_k)$: the barrier radiates at the energy of the wave that drives it, so a component $k$ can only feed $k'=\pm k$.
 
 > [!NOTE]- Derivation: the momentum amplitude of the radiation
 > **The limit.** The difference between $\psi_{\rm sc}(t)$ and $e^{-iH_0t/\hbar}|g_{\rm sc}\rangle$ is $\frac{i}{\hbar}e^{-iH_0t/\hbar}\int_t^\infty dt'\,e^{iH_0t'/\hbar}V\psi(t')$, which contains only sources after $t$. It vanishes as $t\to+\infty$ because the pulse is over.
@@ -358,9 +344,17 @@ so that $|g_{\rm out}\rangle=|g\rangle+|g_{\rm sc}\rangle$ reproduces ST0 §5.2.
 > $$
 > No approximation was made. This energy delta function is the one in $S=1-2\pi i\,\delta(E_\beta-E_\alpha)T$ of Scattering Theory 1, §3.
 
-### S3.4 Numerical check
+### S3.4 During the collision, and a numerical check
 
-The figure of ST0 §5.3 was computed with $\hbar=m=1$, $k_0=\kappa=1$, $\sigma_k=1/8$ (so $\sigma_x=4$, $t_c=4$, $t_R=32$), by evaluating $\int dk\,g(k)\,e^{-iE_kt}\phi_k(x)$ on a grid.
+The figure shows the exact solution, computed directly from the formula of ST0 §5.
+
+![[ST0_fig_exact_solution.png|center|720]]
+
+*Exact $|\psi(x,t)|$ for $k_0=\kappa$, where $\mathcal T(k_0)=\mathcal R(k_0)=\tfrac12$, with $\sigma_x=4$ ($\hbar=m=1$). (a) Spacetime picture. The red dashed line is the center of the free motion $e^{-iH_0t/\hbar}|g\rangle$, i.e. what the particle would do without the barrier. (b) Snapshots of $|\psi(x,t)|^2$ (black) and of the free packet (red dashed). At $t=-40$ the two coincide. At $t=0$ the red curve is $|\langle x|g\rangle|^2$ itself, and the real particle looks nothing like it. At $t=+40$ the real particle is a transmitted plus a reflected packet, each carrying about half the probability.*
+
+For $|t|\lesssim t_c$ the state is neither the incoming packet nor a pair of outgoing ones. On the left, the incident and reflected waves overlap and interfere, producing fringes with spacing $\pi/k_0$; on the right, the transmitted wave is building up. This is what the real particle looks like at $t=0$, and it is not $|g\rangle$.
+
+The figure was computed with $\hbar=m=1$, $k_0=\kappa=1$, $\sigma_k=1/8$ (so $\sigma_x=4$, $t_c=4$, $t_R=32$), by evaluating $\int dk\,g(k)\,e^{-iE_kt}\phi_k(x)$ on a grid.
 
 | quantity | value |
 |---|---|
@@ -376,7 +370,7 @@ The last two lines differ, and the difference is not numerical; §S5.2 explains 
 
 ## S4. The general solution with both incidence directions
 
-The solution of ST0 §5.1 was built only from the left-incident eigenstates, and then checked. Here we start instead from the most general solution, which contains the eigenstates incident from both sides, and derive which of them take part. The result is the same; the point is to see that nothing was lost.
+The solution of ST0 §5 was built only from the left-incident eigenstates, and then checked. Here we start instead from the most general solution, which contains the eigenstates incident from both sides, and derive which of them take part. The result is the same; the point is to see that nothing was lost.
 
 ### S4.1 Both families of eigenstates
 
@@ -442,7 +436,7 @@ $$
 \;}
 $$
 
-Each of the four terms is a free packet, evolved with $H_0$ and cut off to a half line. The **incoming** terms are kept on the side they come from: right-moving on the left, left-moving on the right. These are the $A$ and $D$ terms of §S1.1, combined over all $k$. The **outgoing** terms are kept on the side they go to: right-moving on the right, left-moving on the left. These are the $B$ and $C$ terms. (ST0 §5.2 used this decomposition for $c=0$ at $k<0$.)
+Each of the four terms is a free packet, evolved with $H_0$ and cut off to a half line. The **incoming** terms are kept on the side they come from: right-moving on the left, left-moving on the right. These are the $A$ and $D$ terms of §S1.1, combined over all $k$. The **outgoing** terms are kept on the side they go to: right-moving on the right, left-moving on the left. These are the $B$ and $C$ terms. (ST0 §6.3 used this decomposition for $c=0$ at $k<0$.)
 
 The outgoing amplitude says where the outgoing waves come from. For $k>0$, $c_{\rm out}(k)=\tau\,c(k)+r\,c(-k)$: the right-moving wave on the right is the part of the left-incident wave that was transmitted, plus the part of the right-incident wave that was reflected.
 
@@ -492,10 +486,10 @@ $$
 >
 > A by-product: the norm of $\psi_c(t)$ is constant in time, and in the remote past it equals the norm of $e^{-iH_0t/\hbar}|c\rangle$. Hence $\|\psi_c\|=\|c\|$ for every $c$, and distinct coefficient functions give distinct solutions. This is the normalization of the $\phi_k$, obtained without computing $\langle\phi_k|\phi_{k'}\rangle$.
 
-**Which eigenstates take part is decided by the packet.** The right-incident eigenstates enter with coefficient $g(k)$ at $k<0$. In §S1.1 "a source on the left" was imposed on each eigenstate by setting $D=0$. Here it is a property of the packet: a packet whose free motion comes in from the left has $g=0$ at $k<0$ and contains only left-incident eigenstates. This is the solution of ST0 §5.1. A source on each side would simply give $g$ weight at both signs of $k$, and both families would take part.
+**Which eigenstates take part is decided by the packet.** The right-incident eigenstates enter with coefficient $g(k)$ at $k<0$. In §S1.1 "a source on the left" was imposed on each eigenstate by setting $D=0$. Here it is a property of the packet: a packet whose free motion comes in from the left has $g=0$ at $k<0$ and contains only left-incident eigenstates. This is the solution of ST0 §5. A source on each side would simply give $g$ weight at both signs of $k$, and both families would take part.
 
 > [!INFO]- Remark: the tail of the Gaussian
-> A real Gaussian $g(k)$ is not exactly zero for $k<0$; its weight there is of order $e^{-k_0^2/2\sigma_k^2}$. By ST0 §4.1, this tail is a small left-moving free packet that in the remote past was far to the **right**. So the prepared state $e^{-iH_0t_i/\hbar}|g\rangle$ contains a tiny piece arriving from the other side. The general solution handles it correctly: it enters through the right-incident eigenstates, with coefficient $g(k<0)$. The solution of ST0 §5.1, which integrates only over $k>0$, drops this piece. This is why ST0 §4.1 required that essentially all momenta be positive, $\sigma_k\ll k_0$.
+> A real Gaussian $g(k)$ is not exactly zero for $k<0$; its weight there is of order $e^{-k_0^2/2\sigma_k^2}$. By ST0 §4.1, this tail is a small left-moving free packet that in the remote past was far to the **right**. So the prepared state $e^{-iH_0t_i/\hbar}|g\rangle$ contains a tiny piece arriving from the other side. The general solution handles it correctly: it enters through the right-incident eigenstates, with coefficient $g(k<0)$. The solution of ST0 §5, which integrates only over $k>0$, drops this piece. This is why ST0 §4.1 required that essentially all momenta be positive, $\sigma_k\ll k_0$.
 
 ### S4.4 Long after the collision
 
@@ -507,7 +501,7 @@ $$
 \langle k|g_{\rm out}\rangle=\tau(|k|)\,g(k)+r(|k|)\,g(-k).
 $$
 
-For a packet incident from the left ($g=0$ for $k<0$) this reduces to the result of ST0 §5.2. In general, the outgoing amplitude at momentum $k$ mixes the incoming amplitudes at $k$ and $-k$, the two free states with the same energy:
+For a packet incident from the left ($g=0$ for $k<0$) this reduces to the result of ST0 §6.3. In general, the outgoing amplitude at momentum $k$ mixes the incoming amplitudes at $k$ and $-k$, the two free states with the same energy:
 
 $$
 \begin{pmatrix}\langle k|g_{\rm out}\rangle\\ \langle -k|g_{\rm out}\rangle\end{pmatrix}
@@ -550,13 +544,7 @@ The same averaging also reshapes the outgoing packets. The transmitted momentum 
 
 ### S5.3 The steady beam as a limit of packets
 
-Make the packet narrower and narrower in momentum. It becomes longer in position, $\sigma_x=1/2\sigma_k$, and takes longer to pass the barrier, $t_c=\sigma_x/v_0$. Near the barrier, at distances small compared with $\sigma_x$, all the $\phi_k$ in the superposition look alike, and
-
-$$
-\psi(x,t)\;\simeq\;A(t)\,\phi_{k_0}(x),\qquad A(t)=\int_0^\infty dk\;g(k)\,e^{-iE_kt/\hbar}=\sqrt{2\pi}\,\psi_0(0,t).
-$$
-
-**Near the barrier, a long packet is the stationary state $\phi_{k_0}$, switched on and off slowly** by the envelope $A(t)$, a pulse of duration $t_c$. While the packet passes, the barrier sees a steady beam. In the limit $\sigma_k\to0$ the pulse becomes infinitely long and the steady beam of ST0 §2 is recovered. The fraction $\mathcal T$ of the incident flux in a steady beam and the probability $\mathcal T$ that a single particle is transmitted are the same number, because a steady beam is a long stream of particles, each in a narrow packet.
+ST0 §8.2 uses that near the barrier a long packet is $\psi(x,t)\simeq A(t)\,\phi_{k_0}(x)$, with $A(t)=\sqrt{2\pi}\,\psi_0(0,t)$. Here is why.
 
 > [!NOTE]- Derivation: the long packet near the barrier
 > In $\psi(x,t)=\int_0^\infty dk\,g\,e^{-iE_kt/\hbar}\phi_k(x)$, write $k=k_0+q$ with $|q|\lesssim\sigma_k$. The $k$ dependence of $\phi_k(x)$ comes from $\tau(k)$, $r(k)$, which vary on the scale $|k_0+i\kappa|\ge k_0\gg\sigma_k$, and from $e^{\pm ikx}=e^{\pm ik_0x}e^{\pm iqx}$. For $|x|\ll1/\sigma_k=2\sigma_x$, $e^{\pm iqx}\simeq1$, so $\phi_k(x)\simeq\phi_{k_0}(x)$ and it can be pulled out of the integral. What is left is $A(t)=\int dk\,g\,e^{-iE_kt/\hbar}=\sqrt{2\pi}\,\psi_0(0,t)$, the free packet at the origin, whose modulus is the pulse of §S3.2. The source strength of §S3.2, $\psi(0,t)\simeq\tau(k_0)\psi_0(0,t)$, is the special case $x=0$.
@@ -582,11 +570,9 @@ $$
 > $$
 > i\hbar\,\partial_t\psi_I=-H_0\psi_I+e^{iH_0t/\hbar}(H_0+V)\psi=e^{iH_0t/\hbar}Ve^{-iH_0t/\hbar}\,\psi_I=V_I\,\psi_I .
 > $$
-> Integrating from $t_i$, where $\psi_I(t_i)=|g\rangle$, gives the integral equation of ST0 §7.2.
+> Integrating from $t_i$, where $\psi_I(t_i)=|g\rangle$, gives the integral equation of ST0 §7.2, which ST0 obtains instead from the retarded form of §6.1.
 >
 > **In momentum space.** $\langle k'|V_I(t')|k\rangle=\frac{\lambda}{2\pi}\,e^{i(E_{k'}-E_k)t'/\hbar}$. Only *relative* phases appear, as in the equation for $A_{\beta\alpha}$ in Scattering Theory 1, §2. Integrated over all time they give $2\pi\hbar\,\delta(E_{k'}-E_k)$, the energy delta function of §S3.3.
-
-**The same equation from the retarded form.** Multiplying the retarded solution of §S3.1 by $e^{iH_0t/\hbar}$, and using $e^{iH_0t/\hbar}\psi_0(t)=|g\rangle$, gives the integral equation of ST0 §7.2 with $t_i\to-\infty$. Each term $V_I(t')|\psi_I(t')\rangle$ is the wave radiated by the barrier at time $t'$, folded back to the reference time. The label therefore changes only while the barrier radiates, and after the pulse it has collected all the radiation, $|g\rangle+|g_{\rm sc}\rangle=|g_{\rm out}\rangle$.
 
 **The Born approximation.** Replacing $|\psi_I(t')\rangle$ by $|g\rangle$ on the right-hand side, i.e. letting the barrier be driven by the incident wave alone, gives $\langle k'|g_{\rm sc}\rangle\approx-\frac{i\kappa}{|k'|}g(|k'|)$. Compared with the exact $r=-\frac{i\kappa}{k}\tau$, this sets $\tau\to1$ in the source.
 
