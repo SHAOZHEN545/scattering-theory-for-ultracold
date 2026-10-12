@@ -1,4 +1,4 @@
-This note grew out of a common confusion around one concept used in [[Scattering Theory 1 - Asymptotic Dynamics and the Lippmann--Schwinger Equation|Scattering Theory 1]]. Its §2 writes the outcome of a scattering experiment as a *laboratory amplitude*,
+This note grew out of a common point of confusion in [[Scattering Theory 1 - Asymptotic Dynamics and the Lippmann--Schwinger Equation|Scattering Theory 1]]. Its §2 writes the outcome of a scattering experiment as a *laboratory amplitude*,
 
 $$
 \mathcal A_{hg}(t_f,t_i)=\langle h|\,e^{iH_0t_f/\hbar}\,e^{-iH(t_f-t_i)/\hbar}\,e^{-iH_0t_i/\hbar}\,|g\rangle ,
@@ -12,16 +12,10 @@ Everything here can be done exactly; the details are in the [[Scattering Theory 
 
 ## 1. The problem
 
-We consider a 1D situation: 
+We work in one dimension. A particle of mass $m$ and energy $E>0$ comes in from the left and hits a delta barrier at the origin,
 
 $$
-H=H_0+V,\qquad H_0=\frac{\hat p^2}{2m}.
-$$
-
-A particle of mass $m$ and energy $E>0$ comes in from the left and hits a delta barrier at the origin,
-
-$$
-V(x)=\lambda\,\delta(x),\qquad \lambda>0 .
+H=H_0+V,\qquad H_0=\frac{\hat p^2}{2m},\qquad V(x)=\lambda\,\delta(x),\quad \lambda>0 .
 $$
 
 How much of it is reflected, and how much gets through?
@@ -36,7 +30,7 @@ All of the scattering happens at a single point. The only scale is the wavenumbe
 
 ## 2. The stationary solution
 
-We look for an eigenstate of $H=\hat p^2/2m+\lambda\delta(\hat x)$ at energy $E_k$:
+We look for an eigenstate of $H$ at energy $E_k$:
 
 $$
 -\frac{\hbar^2}{2m}\phi''(x)+\lambda\,\delta(x)\,\phi(x)=E_k\,\phi(x).
@@ -102,7 +96,7 @@ with $g(k)$ peaked at $k_0>0$, of width $\sigma_k\ll k_0$. It behaves as you wou
 
 ### 4.2 The label $|g\rangle$
 
-Which packet does the source prepare? Some state $|\psi(t_i)\rangle$, far to the left. There it moves freely, so we can carry it forward with $H_0$ to the reference time $t=0$ and name it there:
+Which packet does the source prepare? Any packet it likes, as long as it starts far to the left: some state $|\psi(t_i)\rangle$. There it moves freely, so we can carry it forward with $H_0$ to the reference time $t=0$ and name it there:
 
 $$
 |g\rangle\equiv e^{iH_0t_i/\hbar}|\psi(t_i)\rangle,\qquad\text{i.e.}\qquad
@@ -110,6 +104,13 @@ $$
 $$
 
 This looks roundabout. Note what $|g\rangle$ is: it is **not** the state of the real particle at $t=0$, which is in the middle of the collision; it is what the particle *would* look like at $t=0$ without the barrier. And it does **not** depend on $t_i$: prepare earlier, and the packet sits farther away and is wider, without limit, but on the same free motion with the same name. So $|g\rangle$ is a **label** for the incoming free motion, fixed while the prepared state runs off to infinity. This is how Scattering Theory 1, §2 introduces it.
+
+Notice which way the logic runs. We do not ask the source to prepare "$|g\rangle$ run backwards"; whatever it prepares, we carry it to $t=0$ and *call* it by what we find there. Free motion can be undone, so every prepared packet has exactly one label, and nothing is lost by naming it this way.
+
+> [!question]- Then why a real $g$, narrowest at the origin at $t=0$?
+> Only because it gives the simplest formulas and figures; it is our running example, nothing more. A source that prepares its narrowest packet at $x=-L$ instead gives the same $|g(k)|$ with an extra phase, which records where and when the free packet is narrowest. See §S2.3.
+
+And whatever the label is, it is a superposition $|g\rangle=\int dk\,g(k)\,|k\rangle$ of the reference states. We will see that all the barrier does is turn each $|k\rangle$ into a fixed outgoing combination, so a packet only ever supplies the coefficients $g(k)$.
 
 ---
 
@@ -130,7 +131,10 @@ $$
 
 so the question is whether the scattered wave vanishes at early times. The formula does not make this obvious, but the reason is physical, and it is the subject of the next section.
 
-If it works, the payoff is large: the exact state uses the *same* coefficients $g(k)$ as the free packet, so once we know which eigenstate each $|k\rangle$ turns into, we know the answer for every packet. (Why right-incident eigenstates do not enter: §S4.)
+If it works, the payoff is large: the exact state uses the *same* coefficients $g(k)$ as the free packet. The packet enters only through $g(k)$, the barrier only through the eigenstate $\phi_k$ that each $|k\rangle$ turns into. Solve the barrier once, for plane waves, and we have the answer for every packet.
+
+> [!question]- Why only left-incident eigenstates? Isn't "nothing comes in from the right" an assumption?
+> No. Start from the general solution, with eigenstates incident from both sides, and let the packet decide: the right-incident ones enter with weight $g(k<0)$, which vanishes for a packet coming from the left. See §S4.
 
 ---
 
@@ -150,7 +154,10 @@ $$
 \boxed{\;\psi_{\rm sc}(t)=-\frac{i}{\hbar}\int_{-\infty}^{t}dt'\;e^{-iH_0(t-t')/\hbar}\,V\psi(t')\;}
 $$
 
-Read it from right to left. At each earlier time $t'$ the barrier acts on the wave that is there and creates a little new wave, which then moves freely until $t$. The scattered wave is the sum of everything created *before* $t$. For the delta barrier $V\psi(t')=\lambda\,\psi(0,t')\,|x{=}0\rangle$: **the barrier is a point source whose strength is the amplitude $\psi(0,t')$ of the wave hitting it.** This is also where the $e^{ik|x|}$ in $\phi_k$ comes from: a point source radiates to both sides. "Outgoing" in the stationary problem means "caused by the source" in time. (Derivation, and the $+i0$ of Scattering Theory 1, §4 as causality: §S3.1.)
+Read it from right to left. At each earlier time $t'$ the barrier acts on the wave that is there and creates a little new wave, which then moves freely until $t$. The scattered wave is the sum of everything created *before* $t$. For the delta barrier $V\psi(t')=\lambda\,\psi(0,t')\,|x{=}0\rangle$: **the barrier is a point source whose strength is the amplitude $\psi(0,t')$ of the wave hitting it.** This is also where the $e^{ik|x|}$ in $\phi_k$ comes from: a point source radiates to both sides. "Outgoing" in the stationary problem means "caused by the source" in time.
+
+> [!info]- Derivation: the retarded form, and $+i0$ as causality
+> The retarded form is not an extra assumption: it is the $e^{ik|x|}$ of the eigenstates, rewritten in time, and the restriction $t'<t$ is the $+i0$ of Scattering Theory 1, §4. See §S3.1.
 
 > [!figure]
 > ![[ST0_fig_barrier_as_source.svg|center|600]]
@@ -164,7 +171,10 @@ $$
 \big\|\,\psi(t)-e^{-iH_0t/\hbar}|g\rangle\,\big\|\;\xrightarrow{\;t\to-\infty\;}\;0 .
 $$
 
-Our guess is the prepared state, hence the state of the experiment. Notice what did the work: not a special property of the delta function but causality. Nothing can be radiated before something reaches the source, and that holds for any potential of finite range. (How small "negligible" is, and the careful limit: §S3.2.)
+Our guess is the prepared state, hence the state of the experiment. Notice what did the work: not a special property of the delta function but causality. Nothing can be radiated before something reaches the source, and that holds for any potential of finite range.
+
+> [!important]- The slow tail of a Gaussian
+> A Gaussian contains every momentum, including some too slow ever to arrive, so strictly the source is never quite off. But the slow components near $k=0$ have weight $|g(0)|^2\propto e^{-k_0^2/2\sigma_k^2}$, utterly negligible for $\sigma_k\ll k_0$. The estimate, and the limit $t_i\to-\infty$ done carefully: §S3.2.
 
 ### 6.3 After the collision
 
@@ -176,7 +186,10 @@ $$
 \boxed{\;|g_{\rm out}\rangle=\int_0^\infty dk\;g(k)\Big[\tau(k)\,|k\rangle+r(k)\,|{-k}\rangle\Big]\;}
 $$
 
-The collision only changes the label, from $|g\rangle$ to $|g_{\rm out}\rangle$, preserving its norm. Each $|k\rangle$ feeds only $|{\pm k}\rangle$, because the source radiates at the energies that drive it (§S3.3). And "incoming" and "outgoing" now mean "before" and "after". What the particle looks like *during* the collision, a fringed mixture that looks nothing like $|g\rangle$, is shown in §S3.4.
+The collision only changes the label, from $|g\rangle$ to $|g_{\rm out}\rangle$, preserving its norm. Read the box as a rule for the reference states: each $|k\rangle$ goes to $\tau|k\rangle+r|{-k}\rangle$, and the packet just carries its coefficients $g(k)$ along. Only $|{\pm k}\rangle$ appear, because the source radiates at the energies that drive it (§S3.3). And "incoming" and "outgoing" now mean "before" and "after".
+
+> [!question]- So is the particle in the state $|g\rangle$ at $t=0$?
+> No. $|g\rangle$ is what the particle *would* look like at $t=0$ without the barrier. The real particle at $t=0$ is a fringed mixture of incident, reflected, and transmitted waves that looks nothing like it; the exact solution is plotted in §S3.4.
 
 ---
 
@@ -192,7 +205,10 @@ $$
 \boxed{\;\mathcal A_{hg}(t_f,t_i)=\langle h|\,e^{iH_0t_f/\hbar}\,e^{-iH(t_f-t_i)/\hbar}\,e^{-iH_0t_i/\hbar}\,|g\rangle\;}
 $$
 
-Read from right to left: from the incoming label out to the prepared state; through the collision; back to the detector's label. The free factors are not an extra assumption, just the definitions of what is prepared and what is detected. By §6.3, $\mathcal A_{hg}\to\langle h|g_{\rm out}\rangle$. (Counters that accept "everything on the right": §S6.1.)
+Read from right to left: from the incoming label out to the prepared state; through the collision; back to the detector's label. The free factors are not an extra assumption, just the definitions of what is prepared and what is detected. By §6.3, $\mathcal A_{hg}\to\langle h|g_{\rm out}\rangle$.
+
+> [!question]- A real detector is a counter on the right, not a projection onto one packet. Does this still apply?
+> Yes: sum $|\langle h|g_{\rm out}\rangle|^2$ over all right-moving labels and you get $P_{\rm T}$. At late times "on the right" and "moving right" are the same question. See §S6.1.
 
 ### 7.2 The interaction picture follows the label
 
@@ -210,7 +226,10 @@ $$
 V_I(t)=e^{iH_0t/\hbar}Ve^{-iH_0t/\hbar}.
 $$
 
-This is the equation for $U_I$ in Scattering Theory 1, §2, and now we can read it: each term is the wave radiated at $t'$, folded back to $t=0$. The label collects radiation while the source is on and stops changing when the pulse is over. (Derivations, and the Born approximation as "drive the source with the incident wave alone": §S6.2.) The Schrödinger state follows the particle along its whole path, and its phases keep turning forever; the interaction-picture state changes only during the collision.
+This is the equation for $U_I$ in Scattering Theory 1, §2, and now we can read it: each term is the wave radiated at $t'$, folded back to $t=0$. The label collects radiation while the source is on and stops changing when the pulse is over. The Schrödinger state follows the particle along its whole path, and its phases keep turning forever; the interaction-picture state changes only during the collision.
+
+> [!info]- The Born approximation
+> Replace $|\psi_I(t')\rangle$ by $|g\rangle$ on the right-hand side: the source is driven by the incident wave alone. Derivations: §S6.2.
 
 ### 7.3 The $S$ operator
 
@@ -222,17 +241,23 @@ S|g\rangle\equiv\lim_{\substack{t_f\to+\infty\\ t_i\to-\infty}}U_I(t_f,t_i)\,|g\
 S|k\rangle=\tau(|k|)\,|k\rangle+r(|k|)\,|{-k}\rangle .
 $$
 
-$S$ connects only equal energies and contains neither the apparatus nor the times: it describes the barrier alone.
+$S$ connects only equal energies and contains neither the apparatus nor the times: it describes the barrier alone. And this table on the reference states is all we need. Whatever packet a source prepares, its label is some $|g\rangle=\int dk\,g(k)|k\rangle$, and by linearity
+
+$$
+S|g\rangle=\int dk\;g(k)\,S|k\rangle .
+$$
+
+The experiment supplies $g(k)$; the barrier supplies $S|k\rangle$. This is why scattering theory computes $S$ on the reference states and never needs a particular packet.
 
 ### 7.4 The whole calculation in one picture
 
-Classical scattering is organized in exactly the same way, and there it can be drawn.
+Step back, and the procedure of §§4–7 turns out to be an old one. Nobody describes a classical collision by where the particle is at $t=0$, in the middle of it. One gives the straight line it comes in on and the straight line it leaves on, and the collision is the rule that takes one line to the other. That is all $|g\rangle$, $|g_{\rm out}\rangle$, and $S$ are. Classically the rule can be drawn, and we draw it in two dimensions, where a trajectory can visibly bend; in our 1D problem the only outgoing directions are left and right.
 
 > [!figure]
-> ![[Classical analog.svg|center|600]]
+> ![[ST0_fig_classical_analog.svg|center|600]]
 > Each observed ray is named by its free extension (dashed) into the interaction region near $t=0$: $|g\rangle$ for the incoming ray, $|h\rangle$ for the outgoing ray a detector accepts. The real trajectory (orange) bends inside the region. $S_{hg}=\langle h|S|g\rangle$ is the amplitude that the collision switches $g$ into $h$; in quantum mechanics $S|g\rangle$ is a superposition of many outgoing rays (grey fan).
 
-The blue dot is the incoming ray extended freely to $t=0$, i.e. $|g\rangle$; the green dot is $|h\rangle$. The real particle (orange) is at neither dot at $t=0$.
+Read the figure with the quantum steps in mind. Extend the incoming ray freely to $t=0$, as if nothing were there: that is the blue dot, $|g\rangle$. Do the same backwards with an outgoing ray: the green dot, $|h\rangle$. The real particle (orange) is at neither dot at $t=0$; it is in the middle of the bend.
 
 - **Laboratory amplitude**, right to left: from the blue dot out to the source, along the real path, back along the green dashed line to the green dot.
 - **Interaction picture**: the line tangent to the orange curve at time $t$, extended to $t=0$. It turns only inside the interaction region (blue circle), i.e. around $t=0$ (red circle).
@@ -246,7 +271,10 @@ $$
 \langle k'|U(t_f,t_i)|k\rangle\;\simeq\;\langle k'|S|k\rangle\;e^{-iE_k(t_f-t_i)/\hbar}.
 $$
 
-**The Schrödinger table is the $S$ table times a clock that never stops.** The clock is the free motion of the packet running off to infinity, and it is there even without a barrier. The interaction picture removes it at both ends: in the figure, both ends become dots near $t=0$ that stay put however early we prepare and however late we detect, and in between the label changes only while the particle is in the blue circle. That is why the limit exists, and what Scattering Theory 1, §2 means by "factoring out the known reference motion". (Unitarity, the on-shell property, the mathematics behind the picture, and what goes wrong for Coulomb: §S7.)
+**The Schrödinger table is the $S$ table times a clock that never stops.** The clock is the free motion of the packet running off to infinity, and it is there even without a barrier. The interaction picture removes it at both ends: in the figure, both ends become dots near $t=0$ that stay put however early we prepare and however late we detect, and in between the label changes only while the particle is in the blue circle. That is why the limit exists, and what Scattering Theory 1, §2 means by "factoring out the known reference motion".
+
+> [!important]- The label comes to rest only if the potential falls off faster than $1/r$
+> This covers every interaction between ultracold atoms and molecules. For Coulomb the where-and-when part of the label drifts as $\ln t$, and $S$ must be defined relative to distorted reference motions. More on this, and on unitarity, the on-shell property, and the mathematics behind the picture: §S7.
 
 ---
 
@@ -262,7 +290,10 @@ $$
 \boxed{\;P_{\rm T}=\int_0^\infty dk\;|g(k)|^2\,\mathcal T(k)\;}
 $$
 
-Each momentum component is transmitted with its own stationary probability, independently of the others, because the barrier never mixes energies. For a packet narrow in momentum, $P_{\rm T}\simeq\mathcal T(k_0)$. (Why the packet of §S3.4 gives $0.496$ rather than $0.5$: §S5.2.)
+Each momentum component is transmitted with its own stationary probability, independently of the others, because the barrier never mixes energies. For a packet narrow in momentum, $P_{\rm T}\simeq\mathcal T(k_0)$.
+
+> [!info]- Why the packet of §S3.4 gives $P_{\rm T}=0.496$, not $\mathcal T(k_0)=0.5$
+> $P_{\rm T}$ averages $\mathcal T(k)$ over the packet, and at $k_0=\kappa$ the curve is concave. The difference belongs to the packet, not the barrier, and vanishes as $\sigma_k\to0$. See §S5.2.
 
 ### 8.2 A long packet looks like a steady state
 
@@ -284,7 +315,7 @@ So the two pictures do different jobs. **Packets** say what the experiment is: t
 
 ## 9. Summary
 
-The stationary solution gives $\tau$ and $r$ for a steady beam. A particle needs a packet, named by a label $|g\rangle$. The barrier radiates only while the packet is on it, so the exact state follows $|g\rangle$ before the collision and $|g_{\rm out}\rangle$ after. The laboratory amplitude compares this with the detector's free motion; the interaction picture follows the label, and its limit is $S$. A long packet is a slowly switched stationary state, which is why the stationary calculation gives the single-particle answer.
+The stationary solution gives $\tau$ and $r$ for a steady beam. A particle needs a packet. Any packet can be named by a label $|g\rangle$, its free motion carried to $t=0$, and since $|g\rangle$ is a superposition of plane waves $|k\rangle$, it is enough to know what the barrier does to each $|k\rangle$. The barrier radiates only while the packet is on it, so the exact state follows $|g\rangle$ before the collision and $|g_{\rm out}\rangle$ after. The laboratory amplitude compares this with the detector's free motion; the interaction picture follows the label, and its limit is $S$. A long packet is a slowly switched stationary state, which is why the stationary calculation gives the single-particle answer.
 
 | Scattering Theory 1 | here |
 |---|---|
