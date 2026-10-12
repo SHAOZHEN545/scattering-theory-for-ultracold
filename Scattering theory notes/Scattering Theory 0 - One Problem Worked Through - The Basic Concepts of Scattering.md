@@ -1,16 +1,22 @@
-This note grew out of a question I could not answer while reading [[Scattering Theory 1 - Asymptotic Dynamics and the Lippmann--Schwinger Equation|Scattering Theory 1]]. Its §2 writes the outcome of a scattering experiment as a *laboratory amplitude*,
+This note grew out of a common confusion around one concept used in [[Scattering Theory 1 - Asymptotic Dynamics and the Lippmann--Schwinger Equation|Scattering Theory 1]]. Its §2 writes the outcome of a scattering experiment as a *laboratory amplitude*,
 
 $$
 \mathcal A_{hg}(t_f,t_i)=\langle h|\,e^{iH_0t_f/\hbar}\,e^{-iH(t_f-t_i)/\hbar}\,e^{-iH_0t_i/\hbar}\,|g\rangle ,
 $$
 
-with the interaction-picture operator $U_I(t_f,t_i)$ in the middle. Why free evolutions at both ends, and why the interaction picture at all? Here we take the simplest scattering problem there is, the delta barrier from an undergraduate quantum mechanics course, and solve it twice: first the familiar way, then in time. The formula above will appear on its own.
+with the interaction-picture operator $U_I(t_f,t_i)$ in the middle. Why free evolutions at both ends, and why the interaction picture at all? Here we take the simplest scattering problem there is, the delta barrier, and solve it twice: first the familiar way, then in time. The formula above will appear on its own.
 
 Everything here can be done exactly; the details are in the [[Scattering Theory 0 Supplement - Details of the Delta-Barrier Problem|supplement]], and pointers §S$n$ say where. Amplitudes are written $\tau$ and $r$, so that $t$ always means time.
 
 ---
 
 ## 1. The problem
+
+We consider a 1D situation: 
+
+$$
+H=H_0+V,\qquad H_0=\frac{\hat p^2}{2m}.
+$$
 
 A particle of mass $m$ and energy $E>0$ comes in from the left and hits a delta barrier at the origin,
 
