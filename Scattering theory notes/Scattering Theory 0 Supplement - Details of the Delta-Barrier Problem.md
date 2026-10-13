@@ -254,7 +254,7 @@ and reads the barrier as a point source. Here we derive this form from the solut
 > $$
 > \langle x|k\rangle+G_0^{(+)}(x,0;E_k)\,\lambda\,\phi_k(0)=\frac{1}{\sqrt{2\pi}}\Big[e^{ikx}-\frac{i\kappa}{k}\,\tau\,e^{ik|x|}\Big],
 > $$
-> and $-i\kappa\tau/k=-i\kappa/(k+i\kappa)=r$. So $\phi_k=|k\rangle+G_0^{(+)}(E_k)V\phi_k$, the Lippmann–Schwinger equation of Scattering Theory 1, §6. The scattered part of each eigenstate is the radiation of the barrier, driven by the eigenstate itself.
+> and $-i\kappa\tau/k=-i\kappa/(k+i\kappa)=r$. So $\phi_k=|k\rangle+G_0^{(+)}(E_k)V\phi_k$, the Lippmann–Schwinger equation of Scattering Theory 1, §4. The scattered part of each eigenstate is the radiation of the barrier, driven by the eigenstate itself.
 >
 > **From energy to time.** For $\mathrm{Im}\,z>0$, $\int_0^\infty d\tau\,e^{iz\tau/\hbar}=i\hbar/z$, so
 > $$
@@ -610,7 +610,7 @@ ST0 §7.5 showed, with the figure of ST0 §7.4, that the Schrödinger switchboar
 
 ### S7.2 The mathematical statements behind the picture
 
-These belong to the formal treatment in Scattering Theory 1, §7; here they are only stated, each next to the piece of the picture it expresses.
+These belong to the formal treatment in Scattering Theory 1, §6, and are proved in the [[Scattering Theory 1 Supplement - Proofs and Derivations|Scattering Theory 1 Supplement]], §S3–S5; here they are only stated, each next to the piece of the picture it expresses.
 
 *The Schrödinger table goes blank.* For states $|\varphi\rangle,|\chi\rangle$ in the absolutely continuous spectral subspace of $H$, $\langle\varphi|e^{-iHT/\hbar}|\chi\rangle\to0$ as $T\to\infty$ (Riemann–Lebesgue). The operator $e^{-iHT/\hbar}$ converges weakly to zero, and it has no strong limit.
 

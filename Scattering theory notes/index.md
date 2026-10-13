@@ -14,6 +14,7 @@ The central thread is how a collision becomes a measurable scattering rate. A co
 - [[Scattering Theory 0 - One Problem Worked Through - The Basic Concepts of Scattering|A worked problem]] — A one-dimensional delta barrier connects the stationary solution to scattering as a process in time, and motivates the laboratory amplitude and the interaction picture.
 - [[Scattering Theory 0 Supplement - Details of the Delta-Barrier Problem|Details of the worked problem]] — Derivations, checks, and remarks for the delta barrier, including incidence from both sides.
 - [[Scattering Theory 1 - Asymptotic Dynamics and the Lippmann--Schwinger Equation|Asymptotic dynamics]] — Introduces incoming and outgoing states, the scattering operators, and the Lippmann–Schwinger equation.
+- [[Scattering Theory 1 Supplement - Proofs and Derivations|Proofs for asymptotic dynamics]] — Derivations behind the transition operator, and proofs that the Møller operators exist, conserve energy, and give a unitary $S$ for short-range potentials.
 
 ### From states to observable collisions
 

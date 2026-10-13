@@ -330,7 +330,7 @@ The plateau also reconciles the two meanings of $\mathcal T$. The transmitted cu
 
 ### 8.3 A division of labour
 
-So the two pictures do different jobs. **Packets** say what the experiment is: they give "before" and "after" a meaning, and the laboratory amplitude and the interaction picture are built on them. **Stationary states** carry the information about the barrier, $\tau$ and $r$, and are what one computes. The link is the boundary condition of §2: "nothing comes in from the right" builds in causality, the fact that scattered waves are caused by the source (§6.1). In the general theory $\phi_k$ is the scattering state $|\psi_k^{(+)}\rangle$ of Scattering Theory 1, §6, and the $+i0$ in its Lippmann–Schwinger equation is the same causality, written at fixed energy.
+So the two pictures do different jobs. **Packets** say what the experiment is: they give "before" and "after" a meaning, and the laboratory amplitude and the interaction picture are built on them. **Stationary states** carry the information about the barrier, $\tau$ and $r$, and are what one computes. The link is the boundary condition of §2: "nothing comes in from the right" builds in causality, the fact that scattered waves are caused by the source (§6.1). In the general theory $\phi_k$ is the scattering state $|\psi_k^{(+)}\rangle$ of Scattering Theory 1, §4, and the $+i0$ in its Lippmann–Schwinger equation is the same causality, written at fixed energy.
 
 ---
 
