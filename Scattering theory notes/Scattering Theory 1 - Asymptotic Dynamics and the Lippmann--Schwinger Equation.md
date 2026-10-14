@@ -1,6 +1,6 @@
-[[Scattering Theory 0 - One Problem Worked Through - The Basic Concepts of Scattering|Scattering Theory 0]] solved one problem, the delta barrier, and met along the way every idea this note needs: packets named by labels, a laboratory amplitude with free evolutions at both ends, an interaction-picture state that moves only during the collision, and an $S$ operator that connects only equal energies. 
+[[Scattering Theory 0 - One Problem Worked Through - The Basic Concepts of Scattering|Scattering Theory 0]] solved one problem, the delta barrier, and met along the way the most important ideas this note needs: packets named by labels, a laboratory amplitude with free evolutions at both ends, an interaction-picture state that moves only during the collision, and an $S$ operator that connects only equal energies. 
 
-Here we write the same structure for a generic $H=H_0+V$, without relying on a single incident plane wave plus an outgoing scattered wave. The basic objects are reference asymptotic states, the interaction-picture comparison, the state prepared in the remote past, and the transition operator. Coordinate-space amplitudes, partial waves, and cross sections come later, as representations of them.
+Here we write the same story for a generic $H=H_0+V$, without relying on a single incident plane wave plus an outgoing scattered wave. The basic objects are reference asymptotic states, the interaction-picture comparison, the state prepared in the remote past, and the transition operator. Coordinate-space amplitudes, partial waves, and cross sections come later, as representations of them.
 
 The guiding experiment is always the same:
 
