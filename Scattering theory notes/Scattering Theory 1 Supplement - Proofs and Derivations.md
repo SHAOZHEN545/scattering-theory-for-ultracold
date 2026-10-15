@@ -1,8 +1,8 @@
-This note collects the derivations and proofs behind [[Scattering Theory 1 - Asymptotic Dynamics and the Lippmann--Schwinger Equation|Scattering Theory 1]]. It follows the main text section by section, so the two can be read side by side. §S1 and §S2 fill in the steps of ST1 §4 and §5: how the equation of motion becomes the Lippmann–Schwinger equation, what the $+i0$ is, and how the equation for $T$, its closed form, and the Dyson series fit together. §S3–S6 prove what ST1 §6 asserts about the asymptotic limits. Their pictorial version is [[Scattering Theory 0 - One Problem Worked Through - The Basic Concepts of Scattering#7.5 Why the folded switchboard has a limit|Scattering Theory 0, §7.5]], with the corresponding statements listed in [[Scattering Theory 0 Supplement - Details of the Delta-Barrier Problem#S7.2 The mathematical statements behind the picture|ST0 Supplement, §S7.2]].
+This note collects the longer discussions and proofs behind [[Scattering Theory 1 - Asymptotic Dynamics and the Lippmann--Schwinger Equation|Scattering Theory 1]]. Short calculations are in collapsible boxes in the main text itself. What is here is organized by topic: each section picks up a point where ST1 states only the core idea and leaves the full story for later. §S1 is about the $+i0$ of the Lippmann–Schwinger equation, where it comes from and what it means. §S2 fills in the transition operator. §S3–S6 prove what ST1 §6 asserts about the asymptotic limits. Their pictorial version is [[Scattering Theory 0 - One Problem Worked Through - The Basic Concepts of Scattering#7.5 Why the folded switchboard has a limit|Scattering Theory 0, §7.5]], with the corresponding statements listed in [[Scattering Theory 0 Supplement - Details of the Delta-Barrier Problem#S7.2 The mathematical statements behind the picture|ST0 Supplement, §S7.2]].
 
-| here | supplements |
+| here | picks up from |
 |---|---|
-| §S1, the state prepared in the remote past | ST1 §4, §6.1 |
+| §S1, the $+i0$: the remote past, damping, and causality | ST1 §4, §6.1 |
 | §S2, the transition operator | ST1 §5 |
 | §S3, existence of the asymptotic limits | ST1 §6.1, §6.2 |
 | §S4, isometry, intertwining, and energy conservation | ST1 §6.3 |
@@ -11,109 +11,25 @@ This note collects the derivations and proofs behind [[Scattering Theory 1 - Asy
 
 ---
 
-## S1. The state prepared in the remote past
+## S1. The $+i0$: the remote past, damping, and causality
 
-ST1 §4 turns the integral equation of motion into the Lippmann–Schwinger equation in three moves. The time dependence of the prepared state is a free phase. The intermediate energy then drops out of the time integral. And the integral into the past becomes the free resolvent. This section carries out each move in full, shows that the damping used in the last one is produced by the limit $t_i\to-\infty$ itself, and collects what the $+i0$ means. Throughout, continuum labels make the matrix elements distributions; every statement becomes an ordinary one after smearing with packets $g(\alpha)$ and $h(\beta)$, as in ST1 §2.
+In ST1 §4 the equation of motion of a state prepared in the remote past becomes the Lippmann–Schwinger equation, and on the way a time integral running into the remote past turns into the free resolvent $G_0^{(+)}(E)=(E-H_0+i0)^{-1}$. The main text computes that integral by inserting a damping by hand. This raises three questions, which we take in turn. Is the damping an extra assumption, and why must its sign be what it is (§S1.1, §S1.2)? What does the $+i0$ mean physically (§S1.3)? And what changes when the state is fixed in the remote future instead (§S1.4)? Throughout, continuum labels make the matrix elements distributions; every statement becomes an ordinary one after smearing with packets $g(\alpha)$ and $h(\beta)$, as in ST1 §2.
 
-### S1.1 From the equation of motion to the Lippmann–Schwinger equation
+### S1.1 The integral into the past
 
-With $t_i=-\infty$, the integral equation of ST1 §2 reads
-
-$$
-\langle\beta|U_I(t,-\infty)|\alpha\rangle
-=
-\delta(\beta-\alpha)
--\frac{i}{\hbar}\int_{-\infty}^{t}dt'\int d\gamma\,
-V_{\beta\gamma}\,
-e^{i(E_\beta-E_\gamma)t'/\hbar}\,
-\langle\gamma|U_I(t',-\infty)|\alpha\rangle .
-$$
-
-The first thing to notice is that this state depends on time only through a free phase. The time-translation identity of ST1 §3, $U_I(t_f+a,t_i+a)=e^{iH_0a/\hbar}U_I(t_f,t_i)e^{-iH_0a/\hbar}$, holds at all finite times. With $t_f=0$ and $a=t$ it reads $U_I(t,t_i+t)=e^{iH_0t/\hbar}U_I(0,t_i)e^{-iH_0t/\hbar}$. As $t_i\to-\infty$ so does $t_i+t$, and therefore
+The integral in question sits in the [[Scattering Theory 1 - Asymptotic Dynamics and the Lippmann--Schwinger Equation#^eq-eom-remote-past|time-dependent form]] of the equation of motion,
 
 $$
-U_I(t,-\infty)=e^{iH_0t/\hbar}\,U_I(0,-\infty)\,e^{-iH_0t/\hbar},
-\qquad
-\langle\gamma|U_I(t,-\infty)|\alpha\rangle
-=
-e^{i(E_\gamma-E_\alpha)t/\hbar}\,\langle\gamma|\psi_\alpha^{(+)}\rangle ,
+-\frac{i}{\hbar}\int_{-\infty}^{t}dt'\,e^{i(E_\beta-E_\alpha)t'/\hbar}.
 $$
 
-with $|\psi_\alpha^{(+)}\rangle=U_I(0,-\infty)|\alpha\rangle$. In the Schrödinger picture the state is $e^{-iH_0t/\hbar}U_I(t,-\infty)|\alpha\rangle=e^{-iE_\alpha t/\hbar}|\psi_\alpha^{(+)}\rangle$. A state prepared infinitely long ago does not remember when it was prepared, only the free motion it came in on, so it can change only by an overall phase.
+As an ordinary integral it does not converge at its lower end, because the integrand only oscillates there. As a distribution in the energy difference it is well defined, and inserting $e^{\eta t'/\hbar}$ with $\eta\downarrow0$ is one way to compute it; the result is the energy denominator $e^{i(E_\beta-E_\alpha)t/\hbar}/(E_\alpha-E_\beta+i0)$ of the derivation box in ST1 §4. For $\eta<0$ the damped integral would diverge at $t'\to-\infty$. The sign is therefore fixed by the direction in which the integral runs, into the past, and not chosen. As $\eta\downarrow0$ at fixed $t$ the factor $e^{\eta t/\hbar}$ tends to one, so the damping leaves no trace at any finite time. All it does is give a meaning to the remote end.
 
-Now insert this into the equation of motion. The phase of the kernel and the phase of the amplitude combine,
-
-$$
-e^{i(E_\beta-E_\gamma)t'/\hbar}\,e^{i(E_\gamma-E_\alpha)t'/\hbar}=e^{i(E_\beta-E_\alpha)t'/\hbar},
-$$
-
-which no longer depends on $\gamma$. The $\gamma$ integral therefore acts only on $V_{\beta\gamma}\langle\gamma|\psi_\alpha^{(+)}\rangle$, and the completeness relation of ST1 §1 collapses it to $\langle\beta|V|\psi_\alpha^{(+)}\rangle$:
-
-$$
-\langle\beta|U_I(t,-\infty)|\alpha\rangle
-=
-\delta(\beta-\alpha)
--\frac{i}{\hbar}\left[\int_{-\infty}^{t}dt'\,e^{i(E_\beta-E_\alpha)t'/\hbar}\right]
-\langle\beta|V|\psi_\alpha^{(+)}\rangle .
-$$
-
-This is equation (4.1) of ST1.
-
-What about the time integral that is left? As an ordinary integral, $\int_{-\infty}^{t}dt'\,e^{i\omega t'}$ does not converge at its lower end. As a distribution in $\omega$ it is well defined, and inserting $e^{\eta t'/\hbar}$ with $\eta\downarrow0$ is one way to compute it. For $\eta>0$,
-
-$$
--\frac{i}{\hbar}\int_{-\infty}^{t}dt'\,e^{i(E_\beta-E_\alpha)t'/\hbar}e^{\eta t'/\hbar}
-=
--\frac{i}{\hbar}\,\frac{\hbar\,e^{[i(E_\beta-E_\alpha)+\eta]t/\hbar}}{i(E_\beta-E_\alpha)+\eta}
-=
-\frac{e^{[i(E_\beta-E_\alpha)+\eta]t/\hbar}}{E_\alpha-E_\beta+i\eta}.
-$$
-
-For $\eta<0$ the integral would diverge at $t'\to-\infty$. The sign is fixed by the direction in which the integral runs, not chosen; §S1.2 shows that this damping is exactly what the limit $t_i\to-\infty$ produces. As $\eta\downarrow0$ at fixed $t$, the factor $e^{\eta t/\hbar}$ tends to one.
-
-It remains to cancel the phase. The left side is $e^{i(E_\beta-E_\alpha)t/\hbar}\langle\beta|\psi_\alpha^{(+)}\rangle$. The term $\delta(\beta-\alpha)$ can be multiplied by the same phase at no cost, because it forces $E_\beta=E_\alpha$. Dividing by the phase,
-
-$$
-\langle\beta|\psi_\alpha^{(+)}\rangle
-=
-\delta(\beta-\alpha)
-+
-\frac{1}{E_\alpha-E_\beta+i0}\,\langle\beta|V|\psi_\alpha^{(+)}\rangle .
-$$
-
-Since $\langle\beta|G_0^{(+)}(E)|\gamma\rangle=\delta(\beta-\gamma)/(E-E_\beta+i0)$, this is the Lippmann–Schwinger equation
-
-$$
-|\psi_\alpha^{(+)}\rangle
-=
-|\alpha\rangle
-+
-G_0^{(+)}(E_\alpha)V|\psi_\alpha^{(+)}\rangle .
-$$
-
-The state that will leave in the remote future is found the same way. Let $|\psi_\beta^{(-)}\rangle=U_I(0,+\infty)|\beta\rangle$, as in ST1 §6.1. Now the equation of motion is integrated from the final time: $U_I(t,t_f)=1+\frac{i}{\hbar}\int_t^{t_f}dt'\,V_I(t')U_I(t',t_f)$ with $t_f\to+\infty$. The same two moves give a time integral $\frac{i}{\hbar}\int_t^{+\infty}dt'\,e^{i(E_\gamma-E_\beta)t'/\hbar}$, for an outer label $\gamma$. It needs the damping $e^{-\eta t'/\hbar}$, which acts at $t'\to+\infty$, and it gives
-
-$$
-\frac{i}{\hbar}\int_t^{+\infty}dt'\,e^{[i(E_\gamma-E_\beta)-\eta]t'/\hbar}
-=
-\frac{e^{[i(E_\gamma-E_\beta)-\eta]t/\hbar}}{E_\beta-E_\gamma-i\eta},
-$$
-
-so that
-
-$$
-|\psi_\beta^{(-)}\rangle
-=
-|\beta\rangle
-+
-G_0^{(-)}(E_\beta)V|\psi_\beta^{(-)}\rangle .
-$$
-
-The sign of $i0$ is the direction of the asymptotic time limit.
+The damping is often read as switching the interaction on slowly, $V\to e^{\eta t/\hbar}V$, from the remote past. That picture is harmless, but it suggests that the answer might depend on how the interaction is switched on, as if this were one more assumption about the experiment. It does not, and §S1.2 shows why: the damping is what the limit $t_i\to-\infty$ in the definition of $|\psi_\alpha^{(+)}\rangle$ produces on its own.
 
 ### S1.2 The damping is the limit itself
 
-The damping in §S1.1 was inserted by hand. Here the same equation follows from the definition $|\psi_\alpha^{(+)}\rangle=\lim_{t_i\to-\infty}\Omega(t_i)|\alpha\rangle$, with $\Omega(t)=U_I(0,t)=e^{iHt/\hbar}e^{-iH_0t/\hbar}$, and the damping comes out of the limit.
+The damping in §S1.1 was inserted by hand. Here the Lippmann–Schwinger equation follows from the definition $|\psi_\alpha^{(+)}\rangle=\lim_{t_i\to-\infty}\Omega(t_i)|\alpha\rangle$, with $\Omega(t)=U_I(0,t)=e^{iHt/\hbar}e^{-iH_0t/\hbar}$, and the damping comes out of the limit.
 
 If a function $f(t)$ has a limit as $t\to-\infty$, its weighted average
 
@@ -158,7 +74,7 @@ $$
 |\alpha\rangle+G^{(+)}(E_\alpha)V|\alpha\rangle .
 $$
 
-The first form rewrites the scattered part, $G^{(+)}V|\alpha\rangle=G_0^{(+)}V\big(|\alpha\rangle+G^{(+)}V|\alpha\rangle\big)=G_0^{(+)}V|\psi_\alpha^{(+)}\rangle$, and this is the Lippmann–Schwinger equation again. For $|\psi_\beta^{(-)}\rangle$ the limit is $t\to+\infty$, the weight must be $e^{-\eta t/\hbar}$ on $[0,+\infty)$, and the same steps give $|\psi_\beta^{(-)}\rangle=\lim_{\eta\downarrow0}(-i\eta)\,G(E_\beta-i\eta)|\beta\rangle$.
+The first form rewrites the scattered part, $G^{(+)}V|\alpha\rangle=G_0^{(+)}V\big(|\alpha\rangle+G^{(+)}V|\alpha\rangle\big)=G_0^{(+)}V|\psi_\alpha^{(+)}\rangle$, and this is the Lippmann–Schwinger equation again.
 
 ### S1.3 What the $+i0$ means
 
@@ -193,7 +109,7 @@ e^{-i(E-H_0)\tau/\hbar}
 e^{-\eta\tau/\hbar}.
 $$
 
-$G_0^{(+)}$ is the Fourier transform of the retarded free propagator $\theta(\tau)e^{-iH_0\tau/\hbar}$, and $G_0^{(-)}$ that of the advanced one. In §S1.1 the variable is $\tau=t-t'$, the time elapsed since an interaction, and the half line $\tau\geq0$ is the statement that the state at $t$ is built only from interactions at earlier times.
+$G_0^{(+)}$ is the Fourier transform of the retarded free propagator $\theta(\tau)e^{-iH_0\tau/\hbar}$, and $G_0^{(-)}$ that of the advanced one. In the time integral of §S1.1 the variable is $\tau=t-t'$, the time elapsed since an interaction, and the half line $\tau\geq0$ is the statement that the state at $t$ is built only from interactions at earlier times.
 
 On the half line the only exponential damping that converges is $e^{-\eta\tau}$ with $\eta>0$. Any other regulator that respects the half line gives the same limit, for example $e^{-\epsilon\tau^2}$, or none at all once the expression is smeared with smooth packets in energy. As a distribution in $\omega$,
 
@@ -207,23 +123,29 @@ $$
 
 The two pieces have a reading in time. A reference state off the shell by $\Delta=E_\gamma-E$ dephases relative to the driving after $\tau\sim\hbar/|\Delta|$. It contributes only during this short interval, through the principal value: it is a virtual state, with the familiar energy denominator of perturbation theory. A state on the shell keeps its phase for arbitrarily long $\tau$, and its accumulated contribution is the delta function: it is a real state that can propagate for as long as it likes. The on-shell piece is the one that unitarity constrains.
 
-The principal-value identity $1/(x\pm i0)=\operatorname{P}(1/x)\mp i\pi\delta(x)$ is therefore a consequence, not the primary meaning of the prescription. The primary meaning is the boundary condition: the two boundary values distinguish the scattering solution selected by remote-past preparation from the one selected by remote-future detection. Their coordinate-space form depends on the representation; for the delta barrier, $G_0^{(+)}$ gives the outgoing $e^{ik|x|}$ of [[Scattering Theory 0 Supplement - Details of the Delta-Barrier Problem#S3.1 The retarded form, derived|ST0 Supplement, §S3.1]]. The same half line in time appears three times in ST1: as the lower limit of the time integral in §S1.1, as the retarded propagator here, and as the ordered time differences of the Dyson series in §S2.3.
+The principal-value identity $1/(x\pm i0)=\operatorname{P}(1/x)\mp i\pi\delta(x)$ is therefore a consequence, not the primary meaning of the prescription. The primary meaning is the boundary condition: the two boundary values distinguish the scattering solution selected by remote-past preparation from the one selected by remote-future detection. Their coordinate-space form depends on the representation; for the delta barrier, $G_0^{(+)}$ gives the outgoing $e^{ik|x|}$ of [[Scattering Theory 0 Supplement - Details of the Delta-Barrier Problem#S3.1 The retarded form, derived|ST0 Supplement, §S3.1]]. The same half line in time appears three times in ST1: as the lower limit of the time integral in ST1 §4 (§S1.1), as the retarded propagator here, and as the ordered time differences of the Dyson series in §S2.3.
 
-### S1.4 The eigenvalue equation
+### S1.4 The remote future, and the sign $-i0$
 
-Apply $E_\alpha-H_0$ to the Lippmann–Schwinger equation. The first term vanishes because $H_0|\alpha\rangle=E_\alpha|\alpha\rangle$. In the second, $(E_\alpha-H_0)G_0^{(+)}(E_\alpha)$ is the identity in the distributional sense appropriate to the boundary value. Hence
+The state that will leave on the free motion $\beta$ in the remote future is $|\psi_\beta^{(-)}\rangle=U_I(0,+\infty)|\beta\rangle$, as in ST1 §6.1. Everything goes through as in ST1 §4, with the direction of time reversed. The time-shift identity gives the same free phase. The equation of motion is now integrated from the final time, $U_I(t,t_f)=1+\frac{i}{\hbar}\int_t^{t_f}dt'\,V_I(t')U_I(t',t_f)$ with $t_f\to+\infty$, and the intermediate energy drops out as before. What is left is a time integral $\frac{i}{\hbar}\int_t^{+\infty}dt'\,e^{i(E_\gamma-E_\beta)t'/\hbar}$ for an outer label $\gamma$, which runs into the remote future. It needs the damping $e^{-\eta t'/\hbar}$, which acts at $t'\to+\infty$, and it gives
 
 $$
-(E_\alpha-H_0)|\psi_\alpha^{(+)}\rangle
+\frac{i}{\hbar}\int_t^{+\infty}dt'\,e^{[i(E_\gamma-E_\beta)-\eta]t'/\hbar}
 =
-V|\psi_\alpha^{(+)}\rangle ,
-\qquad\text{i.e.}\qquad
-H|\psi_\alpha^{(+)}\rangle
-=
-E_\alpha|\psi_\alpha^{(+)}\rangle .
+\frac{e^{[i(E_\gamma-E_\beta)-\eta]t/\hbar}}{E_\beta-E_\gamma-i\eta},
 $$
 
-The equation does not distinguish $+$ from $-$; the same argument applies to $|\psi_\beta^{(-)}\rangle$, and the sign enters only through the boundary condition. The same conclusion follows directly from the steady state of §S1.1: the Schrödinger state $e^{-iE_\alpha t/\hbar}|\psi_\alpha^{(+)}\rangle$ solves the Schrödinger equation with $H$, which is the eigenvalue equation. Its operator form is the intertwining relation $H\Omega^{(\pm)}=\Omega^{(\pm)}H_0$ of §S4.
+so that
+
+$$
+|\psi_\beta^{(-)}\rangle
+=
+|\beta\rangle
++
+G_0^{(-)}(E_\beta)V|\psi_\beta^{(-)}\rangle .
+$$
+
+The sign of $i0$ is the direction of the asymptotic time limit. The eigenvalue equation $H|\psi^{(\pm)}\rangle=E|\psi^{(\pm)}\rangle$ does not distinguish the two signs; they differ only in the boundary condition, and $G_0^{(-)}$ is the Fourier transform of the advanced propagator of §S1.3. The same limit argument as in §S1.2, with the weight $e^{-\eta t/\hbar}$ on $[0,+\infty)$, gives $|\psi_\beta^{(-)}\rangle=\lim_{\eta\downarrow0}(-i\eta)\,G(E_\beta-i\eta)|\beta\rangle$.
 
 ---
 
@@ -233,7 +155,7 @@ ST1 §5 reads $T$ off the state, derives the equation for $T$, and states its cl
 
 ### S2.1 $T$ from the state, and the equation for $T$
 
-Return to equation (4.1) of ST1, before the phase was cancelled, and let $t\to+\infty$. The left side tends to $S_{\beta\alpha}$. The bracket becomes an integral over the whole line, $\int_{-\infty}^{+\infty}dt'\,e^{i(E_\beta-E_\alpha)t'/\hbar}=2\pi\hbar\,\delta(E_\beta-E_\alpha)$. Therefore
+Return to the [[Scattering Theory 1 - Asymptotic Dynamics and the Lippmann--Schwinger Equation#^eq-eom-remote-past|time-dependent form]] of ST1 §4, before the phase was cancelled, and let $t\to+\infty$. The left side tends to $S_{\beta\alpha}$. The bracket becomes an integral over the whole line, $\int_{-\infty}^{+\infty}dt'\,e^{i(E_\beta-E_\alpha)t'/\hbar}=2\pi\hbar\,\delta(E_\beta-E_\alpha)$. Therefore
 
 $$
 S_{\beta\alpha}
@@ -245,7 +167,7 @@ S_{\beta\alpha}
 T_{\beta\alpha}(E_\alpha)=\langle\beta|V|\psi_\alpha^{(+)}\rangle .
 $$
 
-The same limit can be taken on the left side written with the phase. With $\Delta=E_\beta-E_\alpha$, its scattered part contains $e^{i\Delta t/\hbar}/(-\Delta+i0)$. Since $e^{ixt}\operatorname{P}(1/x)\to i\pi\delta(x)$ as $t\to+\infty$, this tends to $-2\pi i\,\delta(\Delta)$, and the two forms agree. The steady state of §S1.1 is not lost at late times. Its oscillating scattered part, smeared over energies, turns into the on-shell delta function of $S$.
+The same limit can be taken on the left side written with the phase. With $\Delta=E_\beta-E_\alpha$, its scattered part contains $e^{i\Delta t/\hbar}/(-\Delta+i0)$. Since $e^{ixt}\operatorname{P}(1/x)\to i\pi\delta(x)$ as $t\to+\infty$, this tends to $-2\pi i\,\delta(\Delta)$, and the two forms agree. The steady state of ST1 §4 is not lost at late times. Its oscillating scattered part, smeared over energies, turns into the on-shell delta function of $S$.
 
 Multiplying the Lippmann–Schwinger equation by $V$ gives
 

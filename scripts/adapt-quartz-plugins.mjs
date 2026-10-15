@@ -61,3 +61,48 @@ for (const plugin of ["explorer", "search", "graph"]) {
   if (!supported) throw new Error(`Quartz ${plugin} compatibility adapter no longer matches the pinned plugin`)
 }
 console.log("Quartz explorer, search and graph use native relative URLs and the shared content index on project Pages.")
+
+// Native Obsidian block IDs on display math: `$$ … $$` followed by a line
+// `^eq-name`. The pinned plugin puts the ID on the math element, which MathJax
+// later replaces, and keeps "^" in same-page links. Wrap the equation so the ID
+// survives, drop the emptied ID paragraph, and strip "^" from "#^id" links.
+const blockMarker = "/* quartz-math-block-id-adapter */"
+function patch(file, edits) {
+  let source = fs.readFileSync(file, "utf8")
+  if (source.includes(blockMarker)) return
+  for (const [from, to] of edits) {
+    if (!source.includes(from)) throw new Error(`Quartz block-ID adapter no longer matches ${file}`)
+    source = source.replace(from, to)
+  }
+  fs.writeFileSync(file, source + `\n${blockMarker}\n`)
+}
+patch(path.resolve(".quartz/plugins/obsidian-flavored-markdown/dist/index.js"), [
+  [`var applyBlockId = (node, blockId, blocks) => {
+  if (!node.properties) {`, `var applyBlockId = (node, blockId, blocks) => {
+  const mathChild = node.tagName === "pre" && node.children?.find((child) => child.tagName === "code");
+  const mathClass = (node.properties?.className ?? []).concat(mathChild?.properties?.className ?? []);
+  if (mathClass.includes("math-display") || mathClass.includes("language-math")) {
+    const inner = { ...node };
+    node.tagName = "div";
+    node.properties = { className: ["math-block"] };
+    node.children = [inner];
+  }
+  if (!node.properties) {`],
+  [`            if (isElement(sibling)) {
+              applyBlockId(sibling, blockId, blocks);
+              return;
+            }`, `            if (isElement(sibling)) {
+              applyBlockId(sibling, blockId, blocks);
+              if (children.length === 0 && typeof index2 === "number") {
+                parent.children.splice(index2, 1);
+                return index2;
+              }
+              return;
+            }`],
+])
+patch(path.resolve(".quartz/plugins/crawl-links/dist/index.js"), [
+  [`const isInternal = !(isAbsoluteUrlWithOptions(dest, { httpOnly: false }) || dest.startsWith("#"));`,
+   `if (/^#(\\^|%5E)/i.test(dest)) dest = node.properties.href = dest.replace(/^#(\\^|%5E)/i, "#");
+                const isInternal = !(isAbsoluteUrlWithOptions(dest, { httpOnly: false }) || dest.startsWith("#"));`],
+])
+console.log("Quartz block IDs on display math survive MathJax, and same-page block links resolve.")

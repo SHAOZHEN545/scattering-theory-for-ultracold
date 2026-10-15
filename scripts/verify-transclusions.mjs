@@ -25,9 +25,9 @@ function text(node) {
 }
 
 try {
-  write("Target.md", "WHOLE_NOTE_MARKER\n\n## Embedded heading\n\nHEADING_MARKER with $E=\\hbar\\omega$.\n\nBLOCK_MARKER. ^test-block\n\n![[Nested/Helper]]\n\n## Other heading\n\nOTHER_HEADING_MARKER\n")
+  write("Target.md", "WHOLE_NOTE_MARKER\n\n## Embedded heading\n\nHEADING_MARKER with $E=\\hbar\\omega$.\n\nBLOCK_MARKER. ^test-block\n\n$$\nE=mc^2\n$$\n^eq-test\n\n[[#^eq-test|Same-page equation link]]\n\n![[Nested/Helper]]\n\n## Other heading\n\nOTHER_HEADING_MARKER\n")
   write("Nested/Helper.md", "NESTED_EMBED_MARKER\n")
-  write("Nested/Source.md", "[[Target|An aliased link]]\n\n[[Target#Embedded heading|Heading link]]\n\n[[Target#^test-block|Block link]]\n\n![[Target]]\n\n![[Target#Embedded heading]]\n\n![[Target#^test-block]]\n")
+  write("Nested/Source.md", "[[Target|An aliased link]]\n\n[[Target#Embedded heading|Heading link]]\n\n[[Target#^test-block|Block link]]\n\n[[Target#^eq-test|Equation link]]\n\n![[Target]]\n\n![[Target#Embedded heading]]\n\n![[Target#^test-block]]\n")
   write("Cycle A.md", "![[Cycle B]]\n")
   write("Cycle B.md", "![[Cycle A]]\n")
   const build = spawnSync(process.execPath, ["quartz/bootstrap-cli.mjs", "build", "-d", content, "-o", output], { cwd: workspace, encoding: "utf8" })
@@ -47,9 +47,15 @@ try {
   const links = walk(article, (node) => node.tagName === "a").map(attrs)
   assert.ok(links.some((link) => link.href === "../Target#embedded-heading"))
   assert.ok(links.some((link) => link.href === "../Target#test-block"))
+  assert.ok(links.some((link) => link.href === "../Target#eq-test"))
+  const target = parse(fs.readFileSync(path.join(output, "Target.html"), "utf8"))
+  const equation = walk(target, (node) => attrs(node).id === "eq-test")[0]
+  assert.ok(equation && walk(equation, (node) => node.tagName === "mjx-container").length, "equation block ID was lost")
+  assert.ok(walk(target, (node) => node.tagName === "a").map(attrs).some((link) => link.href === "#eq-test"))
+  assert.doesNotMatch(text(walk(target, (node) => node.tagName === "article")[0]), /\^eq-test/)
   assert.ok(links.some((link) => link.href && new URL(link.href, "https://example.com/project/Nested/Source").pathname === "/project/Nested/Helper"))
   assert.match(fs.readFileSync(path.join(output, "Cycle-A.html"), "utf8"), /Circular transclusion detected/)
-  console.log("Verified aliased links, heading/block anchors, repeated and nested note embeds, embedded math, relative URLs and circular-embed protection.")
+  console.log("Verified aliased links, heading/block anchors, equation block IDs, repeated and nested note embeds, embedded math, relative URLs and circular-embed protection.")
 } finally {
   for (const directory of [content, output]) {
     assert.ok(directory.startsWith(workspace + path.sep))
